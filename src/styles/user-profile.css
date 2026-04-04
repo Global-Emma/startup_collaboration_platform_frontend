@@ -1,0 +1,169 @@
+/* =========================
+   PAGE
+========================= */
+.profile-modern {
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* =========================
+   TOP CARD
+========================= */
+.profile-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-soft);
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  margin-bottom: 25px;
+}
+
+/* LEFT */
+.profile-left {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.profile-left img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+/* TEXT */
+.profile-left h1 {
+  font-size: 22px;
+  color: var(--text-h);
+}
+
+.role {
+  font-size: 14px;
+  color: var(--accent);
+}
+
+/* META */
+.profile-meta {
+  display: flex;
+  gap: 15px;
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--text);
+  flex-wrap: wrap;
+}
+
+.profile-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ACTIONS */
+.profile-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* BUTTONS */
+.primary-btn {
+  padding: 10px 16px;
+  border-radius: 25px;
+  background: var(--accent);
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.secondary-btn {
+  padding: 10px 16px;
+  border-radius: 25px;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+}
+
+/* =========================
+   GRID
+========================= */
+.profile-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+/* BOX */
+.profile-box {
+  background: var(--bg-soft);
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+.profile-box h2 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+/* SKILLS */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skills span {
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 12px;
+}
+
+/* STATS */
+.stats-box {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.stats-box h3 {
+  font-size: 18px;
+  color: var(--text-h);
+}
+
+.stats-box p {
+  font-size: 12px;
+  color: var(--text);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Tablet */
+@media (max-width: 800px) {
+  .profile-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+  .profile-left img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .profile-left h1 {
+    font-size: 18px;
+  }
+}

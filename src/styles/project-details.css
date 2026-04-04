@@ -1,0 +1,172 @@
+/* =========================
+   PAGE
+========================= */
+.project-details {
+  padding: 60px 20px;
+  background: var(--bg);
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* =========================
+   TOP SECTION
+========================= */
+.details-top {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.details-top img {
+  width: 50%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.details-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.service {
+  color: var(--accent);
+  font-size: 13px;
+}
+
+.details-info h1 {
+  font-size: 28px;
+  color: var(--text-h);
+}
+
+.description {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* META */
+.meta {
+  display: flex;
+  gap: 15px;
+  font-size: 13px;
+  color: var(--text);
+  flex-wrap: wrap;
+}
+
+/* SKILLS */
+.skills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.skills span {
+  background: var(--accent-bg);
+  color: var(--accent);
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* =========================
+   BOTTOM SECTION
+========================= */
+.details-bottom {
+  display: flex;
+  gap: 30px;
+}
+
+/* LEFT */
+.details-main {
+  flex: 2;
+}
+
+.details-main h2 {
+  margin: 20px 0 10px;
+  color: var(--text-h);
+}
+
+.details-main p,
+.details-main li {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* RIGHT */
+.details-sidebar {
+  flex: 1;
+  background: var(--bg-soft);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  height: fit-content;
+}
+
+/* POSTER */
+.poster {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.poster img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.poster p {
+  font-size: 14px;
+  color: var(--text-h);
+}
+
+/* BUTTONS */
+.apply-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.save-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .details-top {
+    flex-direction: column;
+  }
+
+  .details-top img {
+    width: 100%;
+  }
+
+  .details-bottom {
+    flex-direction: column;
+  }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+  .details-info h1 {
+    font-size: 22px;
+  }
+}

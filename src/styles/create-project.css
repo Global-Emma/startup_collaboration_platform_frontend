@@ -1,0 +1,99 @@
+/* =========================
+   PAGE
+========================= */
+.create-project {
+  max-width: 700px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+/* HEADER */
+.form-header {
+  margin-bottom: 25px;
+}
+
+.form-header h1 {
+  font-size: 26px;
+  color: var(--text-h);
+}
+
+.form-header p {
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* =========================
+   FORM
+========================= */
+.project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: var(--bg-soft);
+  padding: 25px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+/* INPUTS */
+.project-form input,
+.project-form textarea,
+.project-form select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  outline: none;
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* =========================
+   SKILLS
+========================= */
+.skills-input input {
+  width: 100%;
+}
+
+/* SKILLS LIST */
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.skills-list span {
+  background: var(--accent-bg);
+  color: var(--accent);
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* =========================
+   BUTTON
+========================= */
+.submit-btn {
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submit-btn:hover {
+  opacity: 0.9;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 500px) {
+  .form-header h1 {
+    font-size: 22px;
+  }
+}
