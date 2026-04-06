@@ -1,0 +1,156 @@
+/* PAGE */
+.app-page {
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* FLEX */
+.app-container {
+  display: flex;
+  gap: 25px;
+}
+
+/* LEFT / RIGHT RATIO */
+.app-left {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.app-right {
+  flex: 3;
+}
+
+/* CARD */
+.card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+/* PROJECT */
+.project-card-modern h1 {
+  font-size: 20px;
+}
+
+.desc {
+  font-size: 14px;
+  margin: 10px 0;
+  color: var(--text);
+}
+
+.meta {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skills span {
+  background: var(--accent-bg);
+  color: var(--accent);
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* CLIENT */
+.client {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.client img {
+  width: 40px;
+  border-radius: 50%;
+}
+
+/* FORM */
+.form-card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-card textarea,
+.form-card input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  outline: none;
+  background: var(--bg);
+}
+
+/* ROW */
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+/* FILE */
+.file-upload {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.file-upload input {
+  display: block;
+  margin-top: 5px;
+}
+
+/* BUTTON */
+.submit-btn {
+  padding: 12px;
+  border-radius: 25px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--accent);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .app-container {
+    flex-direction: column;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+}

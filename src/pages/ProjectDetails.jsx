@@ -1,13 +1,12 @@
 import { ArrowUpRight } from "lucide-react";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import api from "../utils/axios";
 import { useState } from "react";
 
 const ProjectDetails = () => {
-  
   const { id } = useParams();
 
   const [project, setProject] = useState();
@@ -22,7 +21,7 @@ const ProjectDetails = () => {
 
     fetchProject();
   }, [id]);
-  
+
   const header = {
     text: project?.title,
     subText: "",
@@ -43,7 +42,9 @@ const ProjectDetails = () => {
         <img src={project?.image} alt={project?.title} />
 
         <div className="details-info">
-          <span className="service">{project?.service?.name || project?.service}</span>
+          <span className="service">
+            {project?.service?.name || project?.service}
+          </span>
           <p className="description">{project?.description}</p>
 
           <div className="meta">
@@ -66,9 +67,7 @@ const ProjectDetails = () => {
         {/* LEFT */}
         <div className="details-main">
           <h2>Project Overview</h2>
-          <p>
-            {project?.description}
-          </p>
+          <p>{project?.description}</p>
         </div>
 
         {/* RIGHT SIDEBAR */}
@@ -78,9 +77,11 @@ const ProjectDetails = () => {
             <p>{project?.user?.firstname}</p>
           </div>
 
-          <button className="apply-btn">
-            Apply Now <ArrowUpRight size={18} />
-          </button>
+          <Link to={`/projects/apply/${project._id}`} className="apply-btn">
+            <button className="apply-btn">
+              Apply Now <ArrowUpRight size={18} />
+            </button>
+          </Link>
 
           <button className="save-btn">Save Project</button>
         </div>

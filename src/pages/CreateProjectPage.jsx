@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import api from "../utils/axios";
 
-const CreateProjectPage = () => {
+const CreateProjectPage = ({services}) => {
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -62,7 +62,7 @@ const CreateProjectPage = () => {
     formData.append('location', form.location);
 
     if (form.image) {
-      formData.append('image', form.image);
+      formData.append('file', form.image);
     }
 
     skills.forEach((skill) => {
@@ -131,10 +131,10 @@ const CreateProjectPage = () => {
         {/* SERVICE */}
         <select name="service" onChange={handleChange}>
           <option value="">Select Service</option>
-          <option>Web Development</option>
-          <option>AI Automation</option>
-          <option>App Development</option>
-          <option>UI/UX Design</option>
+          {services.map((service)=>{
+            return <option key={service._id}>{service.name}</option>
+          })}
+          
         </select>
 
         {/* LEVEL */}

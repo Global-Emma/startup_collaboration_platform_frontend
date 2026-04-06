@@ -75,9 +75,8 @@ const Homepage = ({ user, services, projects }) => {
         </div>
 
         <div className="projects-container">
-          {[...projects]
-            .reverse()
-            .slice(0, 5)
+          {projects
+            .slice(0, 4)
             .map((project) => {
               return (
                 <Projects key={project._id} project={project} />

@@ -10,6 +10,7 @@ import './styles/user-dashboard.css'
 import './styles/user-profile.css'
 import './styles/service-details.css'
 import './styles/create-project.css'
+import './styles/application.css'
 import {Routes, Route} from 'react-router-dom'
 import Homepage from './pages/Homepage'
 import SignUp from './pages/SignUp'
@@ -25,6 +26,7 @@ import { useEffect, useState } from 'react'
 import api from './utils/axios'
 import ServiceDetails from './pages/ServiceDetails'
 import CreateProjectPage from './pages/CreateProjectPage'
+import ApplicationPage from './pages/ApplicationPage'
 
 function App() {
 
@@ -76,11 +78,12 @@ function App() {
         <Route path='/sign-in' element={<SignIn />} /> 
         <Route path='/projects' element={<ProjectsPage projects={projects} user={user} />} /> 
         <Route path='/projects/:id' element={<ProjectDetails />} /> 
-        <Route path='/projects/create-project' element={<CreateProjectPage />} /> 
+        <Route path='/projects/create-project' element={<CreateProjectPage services={services}/>} /> 
         <Route path='/services' element={<ServicesPage services={services} user={user}/>} /> 
         <Route path='/services/:id' element={<ServiceDetails user={user}/>} /> 
         <Route path='/about-us' element={<AboutPage />} /> 
         <Route path='/contact-us' element={<ContactPage />} /> 
+        <Route path='/projects/apply/:id' element={<ApplicationPage user={user} />} />
         <Route path='/dashboard' element={<UserDashboard />} /> 
         <Route path='/profile' element={<UserProfile user={user} />} /> 
       </Routes>
