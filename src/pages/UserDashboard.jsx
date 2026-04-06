@@ -11,25 +11,56 @@ import {
   MessageCircle,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import { Link, useResolvedPath } from "react-router-dom";
 
-const projects = [
-  { id: 1, name: "SaaS Dashboard", status: "In Progress" },
-  { id: 2, name: "AI Chatbot", status: "Pending" },
+const navlinks = [
+  {
+    name: "Dashboard",
+    icon: <LayoutDashboard size={18} />,
+    link: "/dashboard",
+  },
+  {
+    name: "Projects",
+    icon: <Briefcase size={18} />,
+    link: "/user-projects",
+  },
+  {
+    name: "Applications",
+    icon: <FileText size={18} />,
+    link: "/user-applications",
+  },
+  {
+    name: "Messages",
+    icon: <MessageCircle size={18} />,
+    link: "/user-messages",
+  },
+  {
+    name: "Settings",
+    icon: <Settings size={18} />,
+    link: "/user-settings",
+  },
 ];
 
-const applications = [
-  { id: 1, project: "E-commerce Redesign", status: "Under Review" },
-  { id: 2, project: "Mobile App", status: "Rejected" },
-];
-
-const UserDashboard = () => {
+const UserDashboard = ({ user }) => {
+  const pathname = useResolvedPath().pathname;
+  const projects = user.projects || [];
+  const applications = user.applications || [];
+  const [activeProjects, setActiveProjects] = useState(0);
+  const [completedProjects, setCompletedProjects] = useState(0);
+  const [cancelledProjects, setCancelledProjects] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [notificationsOpen, setNotificationsOpen] = useState(true);
 
+  projects.forEach((project) => {
+    if (project.status === "active") setActiveProjects((prev) => prev + 1);
+    else if (project.status === "completed")
+      setCompletedProjects((prev) => prev + 1);
+    else if (project.status === "cancelled")
+      setCancelledProjects((prev) => prev + 1);
+  });
+
   return (
     <>
-      <Navbar />
-
       <section className="dashboard">
         {/* SIDEBAR */}
         <aside className={`sidebar ${sidebarOpen ? "open" : "collapsed"}`}>
@@ -39,32 +70,28 @@ const UserDashboard = () => {
           >
             {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
           </div>
-          
+
           <nav>
-            <a className="active">
-              <LayoutDashboard size={18} />
-              {sidebarOpen && <span>Dashboard</span>}
-            </a>
+            <div className="logo">
+              {sidebarOpen && (
+                <Link to="/">
+                  <img src="/images/logo.png" alt="logo" />
+                </Link>
+              )}
+            </div>
 
-            <a>
-              <Briefcase size={18} />
-              {sidebarOpen && <span>Projects</span>}
-            </a>
-
-            <a>
-              <FileText size={18} />
-              {sidebarOpen && <span>Applications</span>}
-            </a>
-
-            <a>
-              <MessageCircle size={18} />
-              {sidebarOpen && <span>Messages</span>}
-            </a>
-
-            <a>
-              <Settings size={18} />
-              {sidebarOpen && <span>Settings</span>}
-            </a>
+            {navlinks.map((link, i) => {
+              const isActive = pathname === link.link;
+              return (
+                <Link key={i}
+                  className={isActive ? "active link" : "link"}
+                  to={link.link}
+                >
+                  {link.icon}
+                  {sidebarOpen && <span>{link.name}</span>}
+                </Link>
+              );
+            })}
           </nav>
         </aside>
 
@@ -73,22 +100,26 @@ const UserDashboard = () => {
           {/* HEADER */}
           <div className="dashboard-header">
             <h1>Dashboard</h1>
-            <p>Welcome back, here’s your activity overview.</p>
+            <p>{`Welcome back, ${user.username || user.firstname || "there"}! Here's your activity overview.`}</p>
           </div>
 
           {/* STATS */}
           <div className="stats">
             <div className="stat-card">
-              <h3>5</h3>
+              <h3>{activeProjects}</h3>
               <p>Active Projects</p>
             </div>
             <div className="stat-card">
-              <h3>12</h3>
+              <h3>{user.applications?.length || 0}</h3>
               <p>Applications Sent</p>
             </div>
             <div className="stat-card">
-              <h3>3</h3>
-              <p>Interviews</p>
+              <h3>{completedProjects}</h3>
+              <p>Completed Projects</p>
+            </div>
+            <div className="stat-card">
+              <h3>{cancelledProjects}</h3>
+              <p>Cancelled Projects</p>
             </div>
           </div>
 
@@ -97,15 +128,19 @@ const UserDashboard = () => {
             <h2>Active Projects</h2>
 
             <div className="dashboard-list">
-              {projects.map((p) => (
-                <div key={p.id} className="list-item">
-                  <div>
-                    <h4>{p.name}</h4>
-                    <span>{p.status}</span>
+              {projects.length === 0 ? (
+                <p>No active projects.</p>
+              ) : (
+                projects.map((p) => (
+                  <div key={p.id} className="list-item">
+                    <div>
+                      <h4>{p.name}</h4>
+                      <span>{p.status}</span>
+                    </div>
+                    <button>View</button>
                   </div>
-                  <button>View</button>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
 
@@ -114,15 +149,19 @@ const UserDashboard = () => {
             <h2>Recent Applications</h2>
 
             <div className="dashboard-list">
-              {applications.map((a) => (
-                <div key={a.id} className="list-item">
-                  <div>
-                    <h4>{a.project}</h4>
-                    <span>{a.status}</span>
+              {applications.length === 0 ? (
+                <p>No applications sent.</p>
+              ) : (
+                applications.map((a) => (
+                  <div key={a.id} className="list-item">
+                    <div>
+                      <h4>{a.project?.title}</h4>
+                      <span>{a.status}</span>
+                    </div>
+                    <button>Details</button>
                   </div>
-                  <button>Details</button>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         </div>

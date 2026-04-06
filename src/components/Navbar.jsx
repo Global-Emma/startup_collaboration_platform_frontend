@@ -34,7 +34,7 @@ const Navbar = ({ user }) => {
           Become a Seller
         </Link>
 
-        {user  ? (
+        {user || localStorage.getItem("login") ? (
           <UserNav
             user={user}
             onLogout={() => {

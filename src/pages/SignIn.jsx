@@ -32,7 +32,7 @@ const SignIn = () => {
           JSON.stringify(response.data.accessToken),
         );
 
-        localStorage.setItem("login", true);
+        localStorage.setItem("login", "true");
         navigate("/");
       }
     } catch (error) {

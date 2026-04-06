@@ -6,7 +6,8 @@ const SignUp = () => {
   const [role, setRole] = useState("freelancer");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-
+  const [skills, setSkills] = useState([]);
+  const [skillInput, setSkillInput] = useState("");
   const [formData, setFormData] = useState({
     username: "",
     firstname: "",
@@ -14,9 +15,24 @@ const SignUp = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    skills: "",
     terms: false,
   });
+
+  // Add skill
+  const addSkill = (e) => {
+    if (e.key === "Enter" && skillInput.trim()) {
+      e.preventDefault();
+      if (!skills.includes(skillInput)) {
+        setSkills([...skills, skillInput]);
+      }
+      setSkillInput("");
+    }
+  };
+
+  // Remove skill
+  const removeSkill = (skill) => {
+    setSkills(skills.filter((s) => s !== skill));
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -39,11 +55,11 @@ const SignUp = () => {
       const response = await api.post("/api/auth/register", {
         ...formData,
         role,
+        skills: role === "freelancer" ? skills : [],
       });
       if (response.data.success) {
         alert("Registration successful! Please log in.");
-        console.log("Registration successful:", response.data);
-        // window.location.href = "/sign-in";
+        window.location.href = "/sign-in";
       }
     } catch (error) {
       console.error("Error registering user:", error);
@@ -144,16 +160,23 @@ const SignUp = () => {
 
             {/* Skills (ONLY for freelancer) */}
             {role === "freelancer" && (
-              <select name="skills" onChange={handleChange}>
-                <option value="">Select Skill</option>
-                <option>Web Development</option>
-                <option>AI Automation</option>
-                <option>App Development</option>
-                <option>Design</option>
-                <option>Cyber Security</option>
-                <option>Data Analysis</option>
-                <option>DevOps</option>
-              </select>
+              <div className="skills-input">
+                <input
+                  type="text"
+                  placeholder="Type a skill and press Enter"
+                  value={skillInput}
+                  onChange={(e) => setSkillInput(e.target.value)}
+                  onKeyDown={addSkill}
+                />
+
+                <div className="skills-list">
+                  {skills.map((skill, i) => (
+                    <span key={i} onClick={() => removeSkill(skill)}>
+                      {skill} ✕
+                    </span>
+                  ))}
+                </div>
+              </div>
             )}
 
             {/* Terms */}

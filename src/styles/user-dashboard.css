@@ -5,7 +5,6 @@
   display: flex;
   min-height: 100vh;
   background: var(--bg);
-  margin-top: 120px
 }
 
 /* =========================
@@ -43,7 +42,7 @@
   gap: 15px;
 }
 
-.sidebar a {
+.sidebar .link {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -53,9 +52,13 @@
   text-decoration: none;
 }
 
-.sidebar a.active {
+.sidebar .link.active {
   color: var(--accent);
   font-weight: 600;
+}
+
+.sidebar .link:hover {
+  color: var(--accent);
 }
 
 /* Hide text when collapsed */

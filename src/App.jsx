@@ -84,7 +84,7 @@ function App() {
         <Route path='/about-us' element={<AboutPage />} /> 
         <Route path='/contact-us' element={<ContactPage />} /> 
         <Route path='/projects/apply/:id' element={<ApplicationPage user={user} />} />
-        <Route path='/dashboard' element={<UserDashboard />} /> 
+        <Route path='/dashboard' element={<UserDashboard user={user} />} /> 
         <Route path='/profile' element={<UserProfile user={user} />} /> 
       </Routes>
   

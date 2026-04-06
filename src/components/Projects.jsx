@@ -4,7 +4,7 @@ const Projects = ({ project }) => {
   return (
     <>
       <div className="project-card">
-        <img src={project.image} alt={project.title} className="project-img" />
+        <img src={project.image || 'https://placeholderimage.co/600x400/ccc/22c55e?text=Project+Image'} alt={project.title} className="project-img" />
 
         <div className="project-content">
           <Link to={`/services/${project.service._id}`} className="service">

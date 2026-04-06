@@ -5,7 +5,7 @@ import Projects from "../components/Projects";
 import Header from "../components/Header";
 
 
-const ProjectsPage = ({projects, user}) => {
+const ProjectsPage = ({projects, services, user}) => {
   const [showFilter, setShowFilter] = useState(false);
 
   const header = {
@@ -30,9 +30,9 @@ const ProjectsPage = ({projects, user}) => {
           <h3>Filters</h3>
 
           <select>
-            <option>All Services</option>
-            <option>Web Development</option>
-            <option>AI Automation</option>
+            {services.map((service) => (
+              <option key={service._id}>{service.name}</option>
+            ))}
           </select>
 
           <select>
