@@ -30,7 +30,7 @@ const ProjectsPage = ({projects, services, user}) => {
           <h3>Filters</h3>
 
           <select>
-            {services.map((service) => (
+            {services?.map((service) => (
               <option key={service._id}>{service.name}</option>
             ))}
           </select>
@@ -52,7 +52,7 @@ const ProjectsPage = ({projects, services, user}) => {
 
         {/* Projects Grid */}
         <div className="projects-grid">
-          {projects.map((project) => {
+          {projects?.map((project) => {
             return (
               <Projects project={project} key={project._id} />
             )

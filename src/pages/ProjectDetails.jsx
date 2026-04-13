@@ -42,9 +42,11 @@ const ProjectDetails = () => {
         <img src={project?.image} alt={project?.title} />
 
         <div className="details-info">
-          <span className="service">
-            {project?.service?.name || project?.service}
-          </span>
+          <Link style={{textDecoration: 'none'}} to={`/services/${project.service._id}`}>
+            <span className="service">
+              {project?.service?.name || project?.service}
+            </span>
+          </Link>
           <p className="description">{project?.description}</p>
 
           <div className="meta">
@@ -77,7 +79,7 @@ const ProjectDetails = () => {
             <p>{project?.user?.firstname}</p>
           </div>
 
-          <Link to={`/projects/apply/${project._id}`} className="apply-btn">
+          <Link to={`/projects/apply/${project._id}`} className="">
             <button className="apply-btn">
               Apply Now <ArrowUpRight size={18} />
             </button>

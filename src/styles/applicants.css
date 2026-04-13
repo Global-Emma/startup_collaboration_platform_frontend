@@ -1,0 +1,333 @@
+/* PAGE (space for sidebar) */
+.applicant-box{
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.applicants-page {
+  padding: 30px;
+  flex: 1;
+  margin: auto;
+}
+
+/* HEADER */
+.applicants-header {
+  margin-bottom: 20px;
+}
+
+.applicants-header h1 {
+  font-size: 26px;
+  color: var(--text-h);
+}
+
+.applicants-header p {
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* CONTAINER */
+.applicants-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* PROJECT PILLS */
+.projects-bar {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.project-pill {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  min-width: 160px;
+}
+
+.project-pill.active {
+  background: var(--accent);
+  color: white;
+}
+
+.project-pill small {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* PROJECT INFO */
+.project-info-card {
+  background: var(--bg);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+/* GRID */
+.applicants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+}
+
+/* CARD */
+.applicant-card {
+  background: var(--bg);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: 0.3s;
+}
+
+.applicant-card:hover {
+  transform: translateY(-3px);
+}
+
+/* TOP */
+.applicant-top {
+  display: flex;
+  gap: 10px;
+}
+
+.applicant-top img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+/* SKILLS */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.skills span {
+  font-size: 11px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: var(--accent-bg);
+}
+
+/* COVER */
+.cover {
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* ACTIONS */
+.btn-action {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.btn-actions button {
+  flex: 1;
+  padding: 7px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.accept {
+  background: #22c55e;
+  color: white;
+}
+
+.reject {
+  background: #f59e0b;
+  color: white;
+}
+
+.delete {
+  background: #ef4444;
+  color: white;
+}
+
+/* EMPTY */
+.empty-state {
+  text-align: center;
+  padding: 60px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .applicants-page {
+    margin-left: 0;
+    flex: 1;
+    padding: 20px;
+  }
+
+  .projects-bar {
+    flex-wrap: nowrap;
+  }
+}
+
+/* Freelancer Section */
+/* PAGE */
+.applications-page {
+  flex: 1;
+  padding: 30px;
+  margin-left: 20px;
+}
+
+/* HEADER */
+.applications-header {
+  margin-bottom: 20px;
+}
+
+.applications-header h1 {
+  font-size: 28px;
+  color: var(--text-h);
+}
+
+.applications-header p {
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* FILTERS */
+.application-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.application-filters button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 30px;
+  background: var(--bg);
+  cursor: pointer;
+  transition: 0.3s;
+  text-transform: capitalize;
+}
+
+.application-filters button.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* GRID */
+.applications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.application-card {
+  background: var(--bg);
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  transition: 0.3s;
+}
+
+.application-card:hover {
+  transform: translateY(-4px);
+}
+
+/* TOP */
+.application-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+/* STATUS */
+.status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status.pending {
+  background: #fff4cc;
+  color: #b78103;
+}
+
+.status.accepted {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status.rejected {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* COMPANY */
+.company {
+  font-size: 14px;
+  color: var(--accent);
+  margin: 5px 0;
+}
+
+/* META */
+.meta {
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* DESCRIPTION */
+.description {
+  margin: 15px 0;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ACTIONS */
+.application-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.application-actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.withdraw-btn {
+  background: #ef4444;
+  color: white;
+}
+
+/* EMPTY */
+.empty-state {
+  text-align: center;
+  padding: 60px;
+  grid-column: 1/-1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .applications-page {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .applications-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .application-filters {
+    flex-wrap: wrap;
+  }
+}

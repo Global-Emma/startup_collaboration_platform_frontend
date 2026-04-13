@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, ArrowUpRight } from "lucide-react";
-import SignUp from "./SignUp";
-import api from "../utils/axios";
-import { useNavigate } from "react-router-dom";
+import { useApp } from "../utils/useApp";
+// import SignUp from "./SignUp";
+// import api from "../utils/axios";
+// import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+  const {login} = useApp()
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -20,24 +22,11 @@ const SignIn = () => {
     });
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await api.post("/api/auth/login", formData);
-      if (response.data.success) {
-        localStorage.setItem(
-          "accessToken",
-          JSON.stringify(response.data.accessToken),
-        );
-
-        localStorage.setItem("login", "true");
-        navigate("/");
-      }
-    } catch (error) {
-      console.error("Login error:", error.response?.data || error.message);
-    }
+    login(formData)
   };
 
   const handleGoogleSignIn = () => {

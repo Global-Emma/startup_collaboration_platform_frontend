@@ -59,7 +59,7 @@ const Homepage = ({ user, services, projects }) => {
         </div>
 
         <div className="services-container">
-          {services.map((service) => {
+          {services?.map((service) => {
             return <Services key={service._id} service={service} />;
           })}
         </div>
@@ -76,7 +76,7 @@ const Homepage = ({ user, services, projects }) => {
 
         <div className="projects-container">
           {projects
-            .slice(0, 4)
+            ?.slice(0, 4)
             .map((project) => {
               return (
                 <Projects key={project._id} project={project} />

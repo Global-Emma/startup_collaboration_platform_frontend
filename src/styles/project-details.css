@@ -143,6 +143,7 @@
   border: 1px solid var(--border);
   background: transparent;
   cursor: pointer;
+  color: var(--text-h)
 }
 
 /* =========================

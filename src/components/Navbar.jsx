@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import NavLinks from "./NavLinks";
 import UserNav from "./UserNav";
 import { Link } from "react-router-dom";
+import { useApp } from "../utils/useApp";
 
 const Navbar = ({ user }) => {
   const [scroll, setScroll] = useState(false);
+  const { logout } = useApp()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,12 +36,11 @@ const Navbar = ({ user }) => {
           Become a Seller
         </Link>
 
-        {user || localStorage.getItem("login") ? (
+        {user ? (
           <UserNav
             user={user}
             onLogout={() => {
-              localStorage.removeItem("login");
-              window.location.href = "/sign-in";
+              logout()
             }}
           />
         ) : (

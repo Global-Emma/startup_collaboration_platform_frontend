@@ -232,3 +232,161 @@
     right: 5%;
   }
 }
+
+/* Employer Dashboard */
+
+/* LAYOUT */
+.emp-dashboard {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-soft);
+}
+
+/* SIDEBAR */
+.emp-sidebar {
+  width: 220px;
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  padding: 20px;
+}
+
+.logo {
+  margin-bottom: 20px;
+}
+
+.emp-sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.emp-sidebar a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* MAIN */
+.emp-main {
+  flex: 1;
+  padding: 20px;
+}
+
+/* TOPBAR */
+.emp-topbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.emp-topbar input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+/* ACTIONS */
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user img {
+  width: 30px;
+  border-radius: 50%;
+}
+
+/* STATS */
+.emp-stats {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  flex: 1;
+  background: var(--bg);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+/* SECTION */
+.emp-section {
+  margin-bottom: 30px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* PROJECTS */
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.project-item {
+  background: var(--bg);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+/* APPLICANTS */
+.applicants {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.applicant {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.applicant img {
+  width: 40px;
+  border-radius: 50%;
+}
+
+button{
+  padding: 12px;
+  border-radius: 5px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .emp-dashboard {
+    flex-direction: column;
+  }
+
+  .emp-sidebar {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .emp-stats {
+    flex-direction: column;
+  }
+}
