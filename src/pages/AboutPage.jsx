@@ -1,9 +1,9 @@
-import React from "react";
+import "../styles/about.css";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 
-const AboutPage = () => {
+const AboutPage = ({user}) => {
   const navigate = useNavigate();
 
   const header = {
@@ -14,7 +14,7 @@ const AboutPage = () => {
 
   return (
     <section className="about">
-      <Navbar />
+      <Navbar user={user} />
       {/* HERO */}
       <Header header={header} />
       {/* STORY */}

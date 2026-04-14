@@ -41,8 +41,8 @@ const NavbarUser = ({ user, onLogout }) => {
 
         <Link className="link" to="/profile">User Profile</Link>
         <Link className="link" to="/dashboard">Dashboard</Link>
-        <Link className="link" to="/projects">My Projects</Link>
-        <Link className="link" to="/saved">Saved Projects</Link>
+        <Link className="link" to="/dashboard/projects">My Projects</Link>
+        <Link className="link" to="/dashboard/saved-projects">Saved Projects</Link>
         <Link className="link" to="/settings">Settings</Link>
 
         <div className="dropdown-divider"></div>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import "../styles/projects.css";
+import { useState } from "react";
 import { Filter, ArrowUpRight } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Projects from "../components/Projects";

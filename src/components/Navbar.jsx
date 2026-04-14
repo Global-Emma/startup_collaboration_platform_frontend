@@ -27,14 +27,10 @@ const Navbar = ({ user }) => {
     <header className={scroll ? "navbar scrolled" : "navbar"}>
       <nav className="nav-container">
         <div className="logo">
-          <img src="images/logo.png" alt="logo" />
+          <img src="/images/logo.png" alt="logo" />
         </div>
         
-        <NavLinks />
-
-        <Link to="/become-seller" className="seller">
-          Become a Seller
-        </Link>
+        <NavLinks user={user} />
 
         {user ? (
           <UserNav

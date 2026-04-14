@@ -8,6 +8,7 @@ import {
   Menu,
   X,
   MessageCircle,
+  Bookmark,
 } from "lucide-react";
 
 const userNavlinks = [
@@ -29,12 +30,17 @@ const userNavlinks = [
   {
     name: "Messages",
     icon: <MessageCircle size={18} />,
-    link: "/user-messages",
+    link: "/dashboard/messages",
+  },
+  {
+    name: "Saved Projects",
+    icon: <Bookmark size={18} />,
+    link: "/dashboard/saved-projects",
   },
   {
     name: "Settings",
     icon: <Settings size={18} />,
-    link: "/user-settings",
+    link: "/dashboard/settings",
   },
 ];
 

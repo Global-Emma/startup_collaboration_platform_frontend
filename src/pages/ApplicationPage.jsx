@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import "../styles/application.css";
+import { useState } from "react";
 import api from "../utils/axios";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -91,9 +92,9 @@ const ApplicationPage = ({user}) => {
             <p className="desc">{project?.description}</p>
 
             <div className="meta">
-              <span>{project?.price}</span>
-              <span>{project?.level}</span>
-              <span>{project?.duration}</span>
+              <span>${project?.price}</span>
+              <span>• {project?.level}</span>
+              <span>• {project?.duration}</span>
             </div>
 
             <div className="skills">

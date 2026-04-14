@@ -1,19 +1,3 @@
-import "./styles/homepage.css";
-import "./styles/signup.css";
-import "./styles/signin.css";
-import "./styles/projects.css";
-import "./styles/project-details.css";
-import "./styles/services.css";
-import "./styles/about.css";
-import "./styles/contact.css";
-import "./styles/user-dashboard.css";
-import "./styles/user-profile.css";
-import "./styles/service-details.css";
-import "./styles/create-project.css";
-import "./styles/application.css";
-import "./styles/messages.css";
-import "./styles/my_projects.css";
-import "./styles/applicants.css";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import SignUp from "./pages/SignUp";
@@ -34,6 +18,10 @@ import { useApp } from "./utils/useApp";
 import MessagesPage from "./dashboard_pages/Messages";
 import MyProjects from "./dashboard_pages/MyProjects";
 import Applications from "./dashboard_pages/Applications";
+import SavedProjects from "./dashboard_pages/SavedProjects";
+import UsersPage from "./pages/UsersPage";
+import UserDetails from "./pages/UserDetails";
+import EditProject from "./pages/EditProject";
 
 function App() {
   const { user } = useApp();
@@ -54,7 +42,7 @@ function App() {
         path="/projects"
         element={<ProjectsPage projects={projects} user={user} />}
       />
-      <Route path="/projects/:id" element={<ProjectDetails />} />
+      <Route path="/projects/:id" element={<ProjectDetails user={user} />} />
       <Route
         path="/projects/create-project"
         element={<CreateProjectPage services={services} />}
@@ -64,8 +52,8 @@ function App() {
         element={<ServicesPage services={services} user={user} />}
       />
       <Route path="/services/:id" element={<ServiceDetails user={user} />} />
-      <Route path="/about-us" element={<AboutPage />} />
-      <Route path="/contact-us" element={<ContactPage />} />
+      <Route path="/about-us" element={<AboutPage user={user} />} />
+      <Route path="/contact-us" element={<ContactPage user={user} />} />
       <Route
         path="/projects/apply/:id"
         element={<ApplicationPage user={user} />}
@@ -84,8 +72,24 @@ function App() {
         element={<MyProjects user={user} allProjects={projects} />}
       />
       <Route
+        path="/dashboard/projects/edit/:id"
+        element={<EditProject user={user} allProjects={projects} services={services} />}
+      />
+      <Route
         path="/dashboard/applications"
         element={<Applications user={user} allProjects={projects} />}
+      />
+      <Route
+        path="/dashboard/saved-projects"
+        element={<SavedProjects user={user} allProjects={projects} />}
+      />
+      <Route
+        path="/users"
+        element={<UsersPage allProjects={projects} user={user} />}
+      />
+      <Route
+        path="/users/profile/:id"
+        element={<UserDetails allProjects={projects} loggedInUser={user} />}
       />
     </Routes>
   );

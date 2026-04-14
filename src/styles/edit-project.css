@@ -1,0 +1,109 @@
+.edit-project-page {
+  display: flex;
+  justify-content: start;
+}
+
+.edit-project-container {
+  padding: 40px;
+  width: 100%;
+  max-width: 800px;
+  background: var(--bg);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.edit-project-container h1 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.edit-project-container p {
+  color: var(--text);
+  margin-bottom: 25px;
+}
+
+.edit-project-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.edit-project-container input,
+.edit-project-container textarea,
+.edit-project-container select {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  width: 100%;
+}
+
+.edit-project-container textarea {
+  min-height: 120px;
+  resize: none;
+}
+
+/* Skills */
+.skills-input-box {
+  display: flex;
+  gap: 10px;
+}
+
+.skills-input-box button {
+  padding: 12px 20px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.skills-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skills-preview span {
+  background: var(--accent);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 30px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.skills-preview button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Submit */
+.submit-btn {
+  padding: 15px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-btn:hover {
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .edit-project-page {
+    padding: 20px;
+  }
+
+  .skills-input-box {
+    flex-direction: column;
+  }
+}

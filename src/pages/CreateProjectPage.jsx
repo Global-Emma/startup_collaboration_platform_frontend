@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import "../styles/create-project.css";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import api from "../utils/axios";

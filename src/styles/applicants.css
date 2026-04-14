@@ -309,6 +309,13 @@
   color: white;
 }
 
+.withdraw-off{
+  opacity: .2;
+  background: #ef4444;
+  color: white;
+  cursor: not-allowed !important
+}
+
 /* EMPTY */
 .empty-state {
   text-align: center;

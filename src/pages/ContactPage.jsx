@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import "../styles/contact.css";
+import { useState } from "react";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 
-const ContactPage = () => {
+const ContactPage = ({user}) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,7 +29,7 @@ const ContactPage = () => {
 
   return (
     <section className="contact">
-      <Navbar />
+      <Navbar user={user} />
 
       {/* HEADER */}
       <Header header={header} />

@@ -1,3 +1,4 @@
+import "../styles/homepage.css";
 import Navbar from "../components/Navbar";
 import Projects from "../components/Projects";
 import Services from "../components/Services";

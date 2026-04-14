@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import "../styles/applicants.css";
+import { useState } from "react";
 import DashboardNav from "../components/DashboardNav";
 import api from "../utils/axios";
 import { Link } from "react-router-dom";
@@ -52,6 +53,10 @@ const Applications = ({ user, allProjects }) => {
     filter === "all"
       ? applications
       : applications.filter((app) => app.status === filter);
+
+  if (!user || !user.role) {
+    return <p>Error loading user. Please try again.</p>;
+  }
 
   return (
     <div className="applicant-box">
@@ -223,14 +228,18 @@ const Applications = ({ user, allProjects }) => {
                       </Link>
 
                       <button
-                        className="withdraw-btn"
+                        className={
+                          app.status === "accepted"
+                            ? "withdraw-off"
+                            : "withdraw-btn"
+                        }
                         onClick={async () => {
                           try {
                             const response = await api.delete(
                               `/api/apply/${app._id}`,
                             );
                             if (response.data.success) {
-                              window.location.href = "/dashboard";
+                              window.location.reload()
                             }
                           } catch (error) {
                             console.log(error);

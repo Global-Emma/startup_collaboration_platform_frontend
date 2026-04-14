@@ -12,24 +12,24 @@
 }
 
 /* HEADER BOX */
-.projects-header-box {
+.my-projects .my-projects-header-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.projects-header-box h1 {
+.my-projects .my-projects-header-box h1 {
   font-size: 24px;
 }
 
-.projects-header-box p {
+.my-projects .projects-header-box p {
   font-size: 14px;
   color: var(--text);
 }
 
 /* BUTTON */
-.create-btn {
+.my-projects .create-btn {
   padding: 10px 16px;
   border-radius: 25px;
   border: none;
@@ -39,80 +39,80 @@
 }
 
 /* FILTERS */
-.filters {
+.my-projects .filters {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
 }
 
-.filters button {
+.my-projects .filters button {
   padding: 6px 14px;
   border-radius: 20px;
   border: 1px solid var(--border);
   background: transparent;
   cursor: pointer;
+  color: var(--text-h);
 }
 
-.filters .active {
+.my-projects .filters .active {
   background: var(--accent);
   color: white;
 }
 
 /* GRID */
-.projects-grid {
+.my-projects .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 16px;
 }
 
 /* CARD */
-.project-card {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-  transition: 0.3s;
+.my-projects .project-card {
+  background: var(--bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  transition: 0.3s !important;
 }
 
-.project-card:hover {
-  transform: translateY(-3px);
-}
-
-/* IMAGE */
-.project-card img {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
+.my-projects .project-card:hover {
+  transform: translateY(-3px) !important;
 }
 
 /* CONTENT */
-.project-card .content {
-  padding: 12px;
+.my-projects .project-card .content {
+  padding: 12px !important;
 }
 
-.status {
+.my-projects .project-card img{
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.my-projects .status {
   font-size: 12px;
   color: var(--accent);
 }
 
-.content h3 {
+.my-projects .content h3 {
   font-size: 15px;
   margin: 5px 0;
 }
 
-.apps {
+.my-projects .apps {
   font-size: 12px;
   color: var(--text);
 }
 
 /* ACTIONS */
-.action-btns {
+.my-projects .action-btns {
   display: flex;
   gap: 8px;
   margin-top: 10px;
 }
 
-.action-btns button {
+.my-projects .action-btns button {
   flex: 1;
   padding: 6px;
   border-radius: 6px;
@@ -120,24 +120,24 @@
   cursor: pointer;
 }
 
-.actions .edit {
+.my-projects .actions .edit {
   background: #eee;
 }
 
-.actions .delete {
+.my-projects .actions .delete {
   background: #ff4d4f;
   color: white;
 }
 
 /* EMPTY */
-.empty {
+.my-projects .empty {
   text-align: center;
   grid-column: 1/-1;
 }
 
 /* RESPONSIVE */
 @media (max-width: 600px) {
-  .projects-header-box {
+  .my-projects .projects-header-box {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
@@ -145,153 +145,180 @@
 }
 
 /*  freelancer projects */
-.user-projects {
+/* PAGE */
+.freelancer-projects-page {
   flex: 1;
   padding: 30px;
   margin-left: 20px;
 }
 
 /* HEADER */
-.projects-header {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  align-items: start;
+.freelancer-projects-header {
+  margin-bottom: 25px;
 }
 
-.projects-header h1 {
-  font-size: 26px;
+.freelancer-projects-header h1 {
+  font-size: 28px;
   color: var(--text-h);
 }
 
-.projects-header p {
-  margin-top: -5px;
-  font-size: 14px;
+.freelancer-projects-header p {
   color: var(--text);
 }
 
 /* FILTERS */
-.projects-filters {
+.project-status-filters {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
-.projects-filters input,
-.projects-filters select {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  outline: none;
+.project-status-filters button {
+  padding: 10px 18px;
+  color: var(--text-h);
+  border: 1px solid #ccc;
+  background: var(--bg-soft);
+  border-radius: 30px;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.project-status-filters button.active {
+  background: var(--accent);
+  color: white;
+  border: none
 }
 
 /* GRID */
-.projects-grid {
+.worked-projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(300px, 1fr)
+  );
+  gap: 20px;
 }
 
 /* CARD */
-.project-card {
+.worked-project-card {
   background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  transition: 0.3s;
+  border: 1px solid var(--border);
+  transition: .3s;
 }
 
-.project-card:hover {
-  transform: translateY(-4px);
+.worked-project-card:hover {
+  transform: translateY(-5px);
 }
 
-/* IMAGE */
-.project-img {
+.worked-project-card img {
   width: 100%;
-  height: 150px;
+  height: 180px;
   object-fit: cover;
 }
 
 /* CONTENT */
-.project-content {
-  padding: 12px;
+.worked-project-content {
+  padding: 20px;
+}
+
+/* TOP */
+.worked-project-top {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* SERVICE */
-.project-service {
+/* STATUS BADGES */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 30px;
   font-size: 12px;
-  color: var(--accent);
+  text-transform: capitalize;
 }
 
-/* TITLE */
-.project-title {
-  font-size: 15px;
-  color: var(--text-h);
+.status-badge.active {
+  background: #dcfce7;
+  color: green;
+}
+
+.status-badge.completed {
+  background: #dbeafe;
+  color: blue;
+}
+
+.status-badge.cancelled {
+  background: #fee2e2;
+  color: red;
 }
 
 /* META */
-.project-meta {
-  font-size: 13px;
+.worked-meta {
+  margin: 10px 0;
   color: var(--text);
 }
 
 /* USER */
-.project-user {
+.worked-user {
   display: flex;
   align-items: center;
-  gap: 8px;
-  border-top: 1px solid var(--border);
-  padding-top: 8px;
+  gap: 10px;
+  margin: 15px 0;
 }
 
-.project-user img {
-  width: 28px;
-  height: 28px;
+.worked-user img {
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
 }
 
-/* ACTIONS */
-.project-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
+.worked-user h4 {
+  font-size: 14px;
 }
 
-.project-actions button {
+.worked-user p {
+  font-size: 12px;
+}
+
+/* ACTIONS */
+.worked-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.worked-actions button {
   flex: 1;
-  padding: 8px;
-  border-radius: 6px;
+  padding: 10px;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
 }
 
-.view-btn {
-  background: #eee;
-}
-
-.apply-btn {
+.complete-btn {
   background: var(--accent);
   color: white;
 }
 
 /* EMPTY */
-.empty {
+.empty-worked-projects {
   text-align: center;
+  padding: 60px;
   grid-column: 1/-1;
-  padding: 40px;
 }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-  .user-projects {
+  .freelancer-projects-page {
     margin-left: 0;
     padding: 20px;
   }
 
-  .projects-filters {
-    flex-direction: column;
+  .project-status-filters {
+    flex-wrap: wrap;
+  }
+
+  .worked-projects-grid {
+    grid-template-columns: 1fr;
   }
 }

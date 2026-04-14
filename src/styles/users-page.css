@@ -1,0 +1,263 @@
+/* PAGE */
+.freelancers-page {
+  padding: 30px;
+  margin-top: 100px;
+}
+
+/* HEADER */
+.users-header {
+  margin-bottom: 25px;
+}
+
+.users-header h1 {
+  font-size: 28px;
+  color: var(--text-h);
+}
+
+.users-header p {
+  color: var(--text);
+}
+
+/* FILTERS */
+.users-filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.users-filters input,
+.users-filters select {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  width: 100%;
+}
+
+/* GRID */
+.users-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(280px, 1fr)
+  );
+  gap: 20px;
+}
+
+/* CARD */
+.user-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 16px;
+  transition: .3s;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+}
+
+/* TOP */
+.user-top {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.user-top img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+/* BIO */
+.user-bio {
+  margin: 15px 0;
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* SKILLS */
+.user-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.user-skills span {
+  background: var(--accent-bg);
+  padding: 6px 10px;
+  border-radius: 30px;
+  font-size: 12px;
+}
+
+/* STATS */
+.user-stats {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+  font-size: 13px;
+}
+
+/* ACTIONS */
+.user-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.user-actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.message-btn {
+  background: var(--accent);
+  color: white;
+}
+
+/* EMPTY */
+.empty-users {
+  text-align: center;
+  padding: 60px;
+  grid-column: 1/-1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .users-page {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .users-filters {
+    flex-direction: column;
+  }
+
+  .users-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* For the employers */
+/* PAGE */
+.employers-page {
+  padding: 30px;
+  margin-top: 100px;
+}
+
+/* HEADER */
+.employers-header {
+  margin-bottom: 25px;
+}
+
+.employers-header h1 {
+  font-size: 28px;
+  color: var(--text-h);
+}
+
+.employers-header p {
+  color: var(--text);
+}
+
+/* FILTERS */
+.employers-filters {
+  margin-bottom: 25px;
+}
+
+.employers-filters input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+/* GRID */
+.employers-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(280px, 1fr)
+  );
+  gap: 20px;
+}
+
+/* CARD */
+.employer-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 16px;
+  transition: .3s;
+}
+
+.employer-card:hover {
+  transform: translateY(-5px);
+}
+
+/* TOP */
+.employer-top {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.employer-top img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+/* BIO */
+.employer-bio {
+  margin: 15px 0;
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* STATS */
+.employer-stats {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+  font-size: 13px;
+}
+
+/* ACTIONS */
+.employer-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.employer-actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.message-btn {
+  background: var(--accent);
+  color: white;
+}
+
+/* EMPTY */
+.empty-employers {
+  text-align: center;
+  padding: 60px;
+  grid-column: 1/-1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .employers-page {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .employers-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,3 +1,4 @@
+import "../styles/project-details.css";
 import { ArrowUpRight } from "lucide-react";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
@@ -6,7 +7,7 @@ import { useEffect } from "react";
 import api from "../utils/axios";
 import { useState } from "react";
 
-const ProjectDetails = () => {
+const ProjectDetails = ({user}) => {
   const { id } = useParams();
 
   const [project, setProject] = useState();
@@ -33,7 +34,7 @@ const ProjectDetails = () => {
 
   return (
     <section className="project-details">
-      <Navbar user={project?.user} />
+      <Navbar user={user} />
 
       <Header header={header} />
 
@@ -85,7 +86,14 @@ const ProjectDetails = () => {
             </button>
           </Link>
 
-          <button className="save-btn">Save Project</button>
+          <button className="save-btn" onClick={async()=>{
+            try {
+              const response = await api.put(`/api/projects/save/${id}`);
+              console.log(response)
+            } catch (error) {
+              console.log(error)
+            }
+          }}>Save Project</button>
         </div>
       </div>
     </section>

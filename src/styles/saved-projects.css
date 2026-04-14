@@ -1,0 +1,161 @@
+/* PAGE */
+.saved-projects{
+  display: flex
+}
+
+.saved-projects-page {
+  flex: 1;
+  padding: 30px;
+  margin-left: 20px;
+}
+
+/* HEADER */
+.saved-header {
+  margin-bottom: 25px;
+}
+
+.saved-header h1 {
+  font-size: 28px;
+  color: var(--text-h);
+}
+
+.saved-header p {
+  color: var(--text);
+}
+
+/* GRID */
+.saved-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(300px, 1fr)
+  );
+  gap: 20px;
+}
+
+/* CARD */
+.saved-project-card {
+  background: var(--bg);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: .3s;
+}
+
+.saved-project-card:hover {
+  transform: translateY(-5px);
+}
+
+/* IMAGE */
+.saved-project-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* CONTENT */
+.saved-project-content {
+  padding: 20px;
+}
+
+/* TOP */
+.saved-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.saved-top span {
+  color: var(--accent);
+  font-size: 13px;
+}
+
+/* REMOVE BTN */
+.remove-saved-btn {
+  border: none;
+  background: #fee2e2;
+  color: red;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* TITLE */
+.saved-project-content h3 {
+  margin: 10px 0;
+  color: var(--text-h);
+}
+
+/* META */
+.saved-meta {
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* DESCRIPTION */
+.saved-description {
+  margin: 12px 0;
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* USER */
+.saved-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.saved-user img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.saved-user h4 {
+  font-size: 14px;
+}
+
+.saved-user p {
+  font-size: 12px;
+}
+
+/* ACTIONS */
+.saved-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.saved-actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.apply-btn {
+  background: var(--accent);
+  color: white;
+}
+
+/* EMPTY */
+.empty-saved {
+  text-align: center;
+  padding: 60px;
+  grid-column: 1/-1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .saved-projects-page {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .saved-projects-grid {
+    grid-template-columns: 1fr;
+  }
+}

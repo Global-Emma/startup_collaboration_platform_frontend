@@ -1,28 +1,32 @@
+import "../styles/user-dashboard.css";
 import { useState, useMemo } from "react";
 import { ChevronUp, ChevronDown } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import DashboardNav from "../components/DashboardNav";
-import { useEffect } from "react";
 
 const UserDashboard = ({ user, allProjects }) => {
   const navigate = useNavigate()
-  console.log(user)
   const projects = useMemo(() => user?.projects || [], [user?.projects]);
   const applications = user?.applications || [];
-  const [activeProjects, setActiveProjects] = useState(0);
-  const [completedProjects, setCompletedProjects] = useState(0);
-  const [cancelledProjects, setCancelledProjects] = useState(0);
   const [notificationsOpen, setNotificationsOpen] = useState(true);
 
-  useEffect(()=>{
-    projects.forEach((project) => {
-    if (project.status === "active") setActiveProjects((prev) => prev + 1);
-    else if (project.status === "completed")
-      setCompletedProjects((prev) => prev + 1);
-    else if (project.status === "cancelled")
-      setCancelledProjects((prev) => prev + 1);
-  });
-  }, [projects])
+  const activeProjects = useMemo(() => {
+   return projects.filter(
+      (project) => project.status === "active"
+   ).length;
+}, [projects]);
+
+const completedProjects = useMemo(() => {
+   return projects.filter(
+      (project) => project.status === "completed"
+   ).length;
+}, [projects]);
+
+const cancelledProjects = useMemo(() => {
+   return projects.filter(
+      (project) => project.status === "cancelled"
+   ).length;
+}, [projects]);
 
   const empProjects =
     allProjects?.filter((p) => p?.user?._id === user?._id) || [];

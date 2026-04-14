@@ -1,0 +1,159 @@
+/* PAGE */
+.view-user-page {
+  padding: 30px;
+  margin-top: 100px;
+}
+
+/* HERO */
+.profile-hero {
+  margin-bottom: 30px;
+}
+
+.profile-cover {
+  height: 180px;
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-alt)
+  );
+  border-radius: 20px;
+}
+
+.profile-main {
+  margin-top: -60px;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 5px solid white;
+  object-fit: cover;
+}
+
+.profile-info h1 {
+  font-size: 28px;
+}
+
+.profile-info p {
+  color: var(--text);
+}
+
+.role-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 14px;
+  border-radius: 30px;
+  background: var(--accent-bg);
+  font-size: 12px;
+}
+
+/* BODY */
+.profile-body {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 25px;
+}
+
+/* CARD */
+.profile-card-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 25px;
+  border-radius: 18px;
+  margin-bottom: 20px;
+}
+
+.profile-card-box h3 {
+  margin-bottom: 15px;
+}
+
+/* SKILLS */
+.skills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skills-wrap span {
+  padding: 8px 14px;
+  background: var(--accent-bg);
+  border-radius: 30px;
+  font-size: 13px;
+}
+
+/* STATS */
+.stats-grid {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.stats-grid h4 {
+  font-size: 22px;
+}
+
+/* RECENT PROJECTS */
+.recent-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.recent-project-item {
+  padding: 15px;
+  border-radius: 12px;
+  background: var(--social-bg);
+  display: flex;
+  justify-content: space-between;
+  color: var(--text)
+}
+
+.recent-project-item span {
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.recent-project-item h4{
+  color: var(text-h) !important
+}
+
+/* BUTTON */
+.message-btn {
+  margin-left: auto;
+  padding: 12px 20px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .view-user-page {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .profile-body {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .message-btn {
+    margin-left: 0;
+  }
+}

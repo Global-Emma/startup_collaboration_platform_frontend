@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import "../styles/messages.css";
+import { useEffect, useRef, useState } from "react";
 // import io from "socket.io-client";
 
 const dummyChats = [

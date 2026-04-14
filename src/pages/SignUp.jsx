@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import "../styles/signup.css";
+import { useState } from "react";
 import { Eye, EyeOff, ArrowUpRight } from "lucide-react";
 import api from "../utils/axios";
 

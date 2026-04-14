@@ -1,4 +1,4 @@
-import React from "react";
+import "../styles/user-profile.css";
 import { Mail, MapPin, Briefcase } from "lucide-react";
 
 

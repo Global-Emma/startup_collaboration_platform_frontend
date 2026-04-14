@@ -1,7 +1,10 @@
-
 import { useResolvedPath } from "react-router-dom";
 
-const NavLinks = () => {
+const NavLinks = ({ user }) => {
+  const path = useResolvedPath();
+
+  const pathname = path.pathname;
+
   const navlinks = [
     {
       name: "Home",
@@ -12,7 +15,7 @@ const NavLinks = () => {
       link: "/projects",
     },
     {
-      name: "Users",
+      name: user?.role ? (user.role === "freelancer" ? "Employers" : "Freelancers") : "Users",
       link: "/users",
     },
     {
@@ -25,19 +28,14 @@ const NavLinks = () => {
     },
   ];
 
-
-  const path = useResolvedPath()
-
-  const pathname = path.pathname
-
   return (
     <ul className="nav-links">
       {navlinks.map((navlink, i) => {
         return (
-          <li className={pathname === navlink.link ? 'active' : '' } key={i} >
-          <a href={navlink.link}>{navlink.name}</a>
-        </li>
-        )
+          <li className={pathname === navlink.link ? "active" : ""} key={i}>
+            <a href={navlink.link}>{navlink.name}</a>
+          </li>
+        );
       })}
     </ul>
   );

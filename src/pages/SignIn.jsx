@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import "../styles/signin.css";
+import { useState } from "react";
 import { Eye, EyeOff, ArrowUpRight } from "lucide-react";
 import { useApp } from "../utils/useApp";
 // import SignUp from "./SignUp";

@@ -1,8 +1,12 @@
+import "../styles/my_projects.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DashboardNav from "../components/DashboardNav";
+import { useMemo } from "react";
+import api from "../utils/axios";
 
 const MyProjects = ({ user, allProjects }) => {
+  const navigate = useNavigate()
   const [filter, setFilter] = useState("all");
 
   const projects = allProjects.filter((p) => p?.user?._id === user?._id);
@@ -10,29 +14,24 @@ const MyProjects = ({ user, allProjects }) => {
   const filteredEmployerProjects =
     filter === "all" ? projects : projects.filter((p) => p.status === filter);
 
-  const [search, setSearch] = useState("");
-  const [serviceFilter, setServiceFilter] = useState("all");
+  // const [search, setSearch] = useState("");
+  // const [serviceFilter, setServiceFilter] = useState("all");
 
-  const activeProjects = user?.projects || [];
+  const workedProjects = useMemo(() => {
+    return user?.projects || [];
+  }, [user?.projects]);
+  const filteredProjects =
+    filter === "all"
+      ? workedProjects
+      : workedProjects.filter((project) => project.status === filter);
 
-  const services = [
-    "all",
-    ...new Set(activeProjects.map((p) => p.service?.name || p.service)),
-  ];
+  const handleMarkCompleted = (id) => {
+    console.log("Mark completed:", id);
 
-  const filteredFreelancerProjects = activeProjects.filter((p) => {
-    const matchSearch = p?.project?.title
-      .toLowerCase()
-      .includes(search.toLowerCase());
+    // Connect backend here later
+  };
 
-    const projectService = p.project?.service?.name;
-    const matchService =
-      serviceFilter === "all" || projectService === serviceFilter;
-
-    return matchSearch && matchService;
-  });
-
-  if (!user) {
+  if (!user || !user.role) {
     return <p>Error loading user. Please try again.</p>;
   }
 
@@ -43,7 +42,7 @@ const MyProjects = ({ user, allProjects }) => {
       {user.role === "employer" ? (
         <section className="my-projects">
           {/* HEADER */}
-          <div className="projects-header-box">
+          <div className="my-projects-header-box">
             <div>
               <h1>My Projects</h1>
               <p>Manage and track your projects</p>
@@ -88,7 +87,7 @@ const MyProjects = ({ user, allProjects }) => {
                     <h3>{project.title}</h3>
 
                     <p>
-                      {project.price} • {project.duration}
+                      ${project.price} • {project.duration}
                     </p>
 
                     <span className="apps">
@@ -100,8 +99,17 @@ const MyProjects = ({ user, allProjects }) => {
                         <button>View</button>
                       </Link>
 
-                      <button className="edit">Edit</button>
-                      <button className="delete">Delete</button>
+                      <button className="edit" onClick={()=> navigate(`/dashboard/projects/edit/${project._id}`)}>Edit</button>
+                      <button className="delete" onClick={async()=>{
+                        try {
+                          const response = await api.delete(`/api/projects/${project._id}`)
+                          if(response.data.success){
+                            alert('Project Deleted Successfully')
+                          }
+                        } catch (error) {
+                          console.log(error)
+                        }
+                      }}>Delete</button>
                     </div>
                   </div>
                 </div>
@@ -110,78 +118,109 @@ const MyProjects = ({ user, allProjects }) => {
           </div>
         </section>
       ) : (
-        <div className="user-projects">
+        <div className="freelancer-projects-page">
           {/* HEADER */}
-          <div className="projects-header">
-            <h1>Projects</h1>
-            <p>View your past and present projects</p>
+          <div className="freelancer-projects-header">
+            <div>
+              <h1>Worked Projects</h1>
+              <p>Track and manage all projects you've worked on</p>
+            </div>
           </div>
 
           {/* FILTERS */}
-          <div className="projects-filters">
-            <input
-              placeholder="Search..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-
-            <select
-              value={serviceFilter}
-              onChange={(e) => setServiceFilter(e.target.value)}
-            >
-              {services.map((s, i) => (
-                <option key={i} value={s}>
-                  {s}
-                </option>
-              ))}
-            </select>
+          <div className="project-status-filters">
+            {["all", "active", "completed", "cancelled"].map((status) => (
+              <button
+                key={status}
+                className={filter === status ? "active" : ""}
+                onClick={() => setFilter(status)}
+              >
+                {status}
+              </button>
+            ))}
           </div>
 
           {/* GRID */}
-          <div className="projects-grid">
-            {filteredFreelancerProjects.length === 0 ? (
-              <div className="empty">No projects found</div>
+          <div className="worked-projects-grid">
+            {filteredProjects.length === 0 ? (
+              <div className="empty-worked-projects">
+                <h3>No Projects Found</h3>
+                <p>You haven't worked on any projects yet.</p>
+              </div>
             ) : (
-              filteredFreelancerProjects.map((project) => (
-                <div className="project-card" key={project._id}>
+              filteredProjects.map((p, i) => (
+                <div className="worked-project-card" key={p?.project?._id || i}>
                   <img
                     src={
-                      project?.project?.image ||
+                      p?.project?.image ||
                       "https://placeholderimage.co/600x400/ccc/22c55e?text=Project+Image"
                     }
                     alt=""
                   />
 
-                  <div className="project-content">
-                    <Link to={`/services/${project?.project.service._id}`}>
-                      <span className="project-service">
-                        {project.project?.service?.name}
+                  <div className="worked-project-content">
+                    {/* STATUS */}
+                    <div className="worked-project-top">
+                      <Link
+                        style={{ textDecoration: "none" }}
+                        className="service"
+                        to={`/services/${p?.project?.service._id}`}
+                      >
+                        <p>
+                          {typeof p?.project?.service === "object"
+                            ? p?.project?.service?.name
+                            : p?.project?.service}
+                        </p>
+                      </Link>
+                      <span className={`status-badge ${p?.project?.status}`}>
+                        {p?.project?.status}
                       </span>
+                    </div>
+
+                    {/* TITLE */}
+                    <Link
+                      style={{ textDecoration: "none" }}
+                      className="project-title"
+                      to={`/projects/${p?.project?._id}`}
+                    >
+                      <h3>{p?.project?.title}</h3>
                     </Link>
 
-                    <Link to={`/projects/${project?.project?._id}`}>
-                      <h3>{project?.project?.title}</h3>
-                    </Link>
-
-                    <p>
-                      {project?.project?.price} • {project?.project?.duration}
+                    {/* META */}
+                    <p className="worked-meta">
+                      {p?.project?.price} • {p?.project?.duration}
                     </p>
 
-                    <div className="project-user">
+                    {/* EMPLOYER */}
+                    <div className="worked-user">
                       <img
                         src={
-                          project?.project?.user?.avatar ||
+                          p?.project?.user?.avatar ||
                           "/images/default-avatar.png"
                         }
                         alt=""
                       />
-                      <p>{project?.project?.user?.username}</p>
+
+                      <div>
+                        <h4>{p?.project?.user?.username}</h4>
+                        <p>Employer</p>
+                      </div>
                     </div>
 
-                    <div className="project-actions">
-                      <Link to={`/projects/${project?.project?._id}`}>
+                    {/* ACTIONS */}
+                    <div className="worked-actions">
+                      <Link to={`/projects/${p?.project?._id}`}>
                         <button>View</button>
                       </Link>
+
+                      {p?.project?.status === "active" && (
+                        <button
+                          className="complete-btn"
+                          onClick={() => handleMarkCompleted(p?.project?._id)}
+                        >
+                          Mark Completed
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
