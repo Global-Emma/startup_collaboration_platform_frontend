@@ -1,6 +1,6 @@
 import "../styles/user-details.css";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../utils/axios";
 import Navbar from "../components/Navbar";
 
@@ -22,6 +22,26 @@ const UserDetails = ({ loggedInUser, allProjects }) => {
   const projects = allProjects?.filter((project) => {
     return project.user._id === id;
   });
+
+  const navigate = useNavigate();
+
+  const handleStartConversation = async (receiverId) => {
+    try {
+      const response = await api.post("/api/chat", {
+        receiverId,
+      });
+
+      if (response.data.success) {
+        navigate("/dashboard/messages", {
+          state: {
+            conversationId: response.data.data._id,
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (!user) {
     return (
@@ -56,7 +76,12 @@ const UserDetails = ({ loggedInUser, allProjects }) => {
             <span className="role-badge">{user.role}</span>
           </div>
 
-          <button className="message-btn">Message User</button>
+          <button
+            onClick={() => handleStartConversation(user._id)}
+            className="message-btn"
+          >
+            Message User
+          </button>
         </div>
       </div>
 

@@ -15,18 +15,34 @@ import ServiceDetails from "./pages/ServiceDetails";
 import CreateProjectPage from "./pages/CreateProjectPage";
 import ApplicationPage from "./pages/ApplicationPage";
 import { useApp } from "./utils/useApp";
-import MessagesPage from "./dashboard_pages/Messages";
 import MyProjects from "./dashboard_pages/MyProjects";
 import Applications from "./dashboard_pages/Applications";
 import SavedProjects from "./dashboard_pages/SavedProjects";
 import UsersPage from "./pages/UsersPage";
 import UserDetails from "./pages/UserDetails";
 import EditProject from "./pages/EditProject";
+import MessagesPage from "./dashboard_pages/MessagesPage";
+import { useEffect } from "react";
+import socket from "./utils/socket";
 
 function App() {
   const { user } = useApp();
   const { services } = useApp();
   const { projects } = useApp();
+
+  // Run Socket
+  useEffect(() => {
+    if (user) {
+      socket.auth = {
+        token: JSON.parse(localStorage.getItem("accessToken")),
+      };
+
+      socket.connect();
+      console.log("Socket connected:", socket.connected);
+    }
+
+    return () => socket.disconnect();
+  }, [user]);
 
   return (
     <Routes>
@@ -73,7 +89,9 @@ function App() {
       />
       <Route
         path="/dashboard/projects/edit/:id"
-        element={<EditProject user={user} allProjects={projects} services={services} />}
+        element={
+          <EditProject user={user} allProjects={projects} services={services} />
+        }
       />
       <Route
         path="/dashboard/applications"

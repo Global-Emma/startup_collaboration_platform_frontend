@@ -1,11 +1,31 @@
 import "../styles/users-page.css";
 import { useMemo, useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import api from "../utils/axios";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import api from "../utils/axios";
 const UsersPage = ({ user, allProjects }) => {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
+
+  const handleStartConversation = async (receiverId) => {
+    try {
+      const response = await api.post("/api/chat", {
+        receiverId,
+      });
+
+      if (response.data.success) {
+        navigate("/dashboard/messages", {
+          state: {
+            conversationId: response.data.data._id,
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     const getAllUsers = async () => {
       const response = await api.get("/api/auth/users");
@@ -106,54 +126,59 @@ const UsersPage = ({ user, allProjects }) => {
               </div>
             ) : (
               filteredUsers.map((user) => {
+                return (
+                  <div className="user-card" key={user._id}>
+                    {/* TOP */}
+                    <div className="user-top">
+                      <img
+                        src={user.avatar || "/images/default-avatar.png"}
+                        alt=""
+                      />
 
-                return(
-                <div className="user-card" key={user._id}>
-                  {/* TOP */}
-                  <div className="user-top">
-                    <img
-                      src={user.avatar || "/images/default-avatar.png"}
-                      alt=""
-                    />
+                      <div>
+                        <h3>{user.username}</h3>
+                        <p>
+                          {user.firstname} {user.lastname}
+                        </p>
+                      </div>
+                    </div>
 
-                    <div>
-                      <h3>{user.username}</h3>
-                      <p>
-                        {user.firstname} {user.lastname}
-                      </p>
+                    {/* BIO */}
+                    <p className="user-bio">
+                      {user.bio?.slice(0, 90) ||
+                        "Experienced freelancer available for work."}
+                    </p>
+
+                    {/* SKILLS */}
+                    <div className="user-skills">
+                      {user.skills?.slice(0, 4).map((skill, i) => (
+                        <span key={i}>{skill}</span>
+                      ))}
+                    </div>
+
+                    {/* STATS */}
+                    <div className="user-stats">
+                      <span>{user.projects?.length || 0} Projects</span>
+
+                      <span>{user.rating || "5.0"} ⭐</span>
+                    </div>
+
+                    {/* ACTIONS */}
+                    <div className="user-actions">
+                      <Link to={`/users/profile/${user._id}`}>
+                        <button>View Profile</button>
+                      </Link>
+
+                      <button
+                        onClick={() => handleStartConversation(user._id)}
+                        className="message-btn"
+                      >
+                        Message
+                      </button>
                     </div>
                   </div>
-
-                  {/* BIO */}
-                  <p className="user-bio">
-                    {user.bio?.slice(0, 90) ||
-                      "Experienced freelancer available for work."}
-                  </p>
-
-                  {/* SKILLS */}
-                  <div className="user-skills">
-                    {user.skills?.slice(0, 4).map((skill, i) => (
-                      <span key={i}>{skill}</span>
-                    ))}
-                  </div>
-
-                  {/* STATS */}
-                  <div className="user-stats">
-                    <span>{user.projects?.length || 0} Projects</span>
-
-                    <span>{user.rating || "5.0"} ⭐</span>
-                  </div>
-
-                  {/* ACTIONS */}
-                  <div className="user-actions">
-                    <Link to={`/users/profile/${user._id}`}>
-                      <button>View Profile</button>
-                    </Link>
-
-                    <button className="message-btn">Message</button>
-                  </div>
-                </div>
-              )})
+                );
+              })
             )}
           </div>
         </div>
@@ -187,48 +212,54 @@ const UsersPage = ({ user, allProjects }) => {
             ) : (
               filteredEmployers.map((employer) => {
                 const projects = allProjects.filter((project) => {
-                  return project.user._id === employer._id
-                })
+                  return project.user._id === employer._id;
+                });
                 return (
-                <div className="employer-card" key={employer._id}>
-                  {/* TOP */}
-                  <div className="employer-top">
-                    <img
-                      src={employer.avatar || "/images/default-avatar.png"}
-                      alt=""
-                    />
+                  <div className="employer-card" key={employer._id}>
+                    {/* TOP */}
+                    <div className="employer-top">
+                      <img
+                        src={employer.avatar || "/images/default-avatar.png"}
+                        alt=""
+                      />
 
-                    <div>
-                      <h3>{employer.username}</h3>
-                      <p>
-                        {employer.firstname} {employer.lastname}
-                      </p>
+                      <div>
+                        <h3>{employer.username}</h3>
+                        <p>
+                          {employer.firstname} {employer.lastname}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* BIO */}
+                    <p className="employer-bio">
+                      {employer.bio?.slice(0, 100) ||
+                        "Employer available for hiring talented freelancers."}
+                    </p>
+
+                    {/* STATS */}
+                    <div className="employer-stats">
+                      <span>{projects?.length || 0} Posted</span>
+
+                      <span>{employer.rating || "5.0"} ⭐</span>
+                    </div>
+
+                    {/* ACTIONS */}
+                    <div className="employer-actions">
+                      <Link to={`/users/profile/${employer._id}`}>
+                        <button>View Profile</button>
+                      </Link>
+
+                      <button
+                        onClick={() => handleStartConversation(employer._id)}
+                        className="message-btn"
+                      >
+                        Message
+                      </button>
                     </div>
                   </div>
-
-                  {/* BIO */}
-                  <p className="employer-bio">
-                    {employer.bio?.slice(0, 100) ||
-                      "Employer available for hiring talented freelancers."}
-                  </p>
-
-                  {/* STATS */}
-                  <div className="employer-stats">
-                    <span>{projects?.length || 0} Posted</span>
-
-                    <span>{employer.rating || "5.0"} ⭐</span>
-                  </div>
-
-                  {/* ACTIONS */}
-                  <div className="employer-actions">
-                    <Link to={`/users/profile/${employer._id}`}>
-                      <button>View Profile</button>
-                    </Link>
-
-                    <button className="message-btn">Message</button>
-                  </div>
-                </div>
-              )})
+                );
+              })
             )}
           </div>
         </div>

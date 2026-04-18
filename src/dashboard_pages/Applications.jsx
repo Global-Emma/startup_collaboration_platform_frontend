@@ -111,13 +111,15 @@ const Applications = ({ user, allProjects }) => {
                       applicants.map((app, i) => (
                         <div className="applicant-card" key={i}>
                           <div className="applicant-left">
-                            <img
-                              src={
-                                app?.applicant?.avatar ||
-                                "/images/default-avatar.png"
-                              }
-                              alt=""
-                            />
+                            <Link to={`/users/profile/${app?.applicant?._id}`}>
+                              <img
+                                src={
+                                  app?.applicant?.avatar ||
+                                  "/images/default-avatar.png"
+                                }
+                                alt=""
+                              />
+                            </Link>
 
                             <div>
                               <h4>{app?.applicant?.username}</h4>
@@ -239,7 +241,7 @@ const Applications = ({ user, allProjects }) => {
                               `/api/apply/${app._id}`,
                             );
                             if (response.data.success) {
-                              window.location.reload()
+                              window.location.reload();
                             }
                           } catch (error) {
                             console.log(error);

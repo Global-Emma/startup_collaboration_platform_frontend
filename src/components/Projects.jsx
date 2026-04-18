@@ -1,10 +1,17 @@
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Projects = ({ project }) => {
   return (
     <>
       <div className="project-card">
-        <img src={project.image || 'https://placeholderimage.co/600x400/ccc/22c55e?text=Project+Image'} alt={project.title} className="project-img" />
+        <img
+          src={
+            project.image ||
+            "https://placeholderimage.co/600x400/ccc/22c55e?text=Project+Image"
+          }
+          alt={project.title}
+          className="project-img"
+        />
 
         <div className="project-content">
           <Link to={`/services/${project.service._id}`} className="service">
@@ -18,15 +25,22 @@ const Projects = ({ project }) => {
           <p className="price">${project.price}</p>
 
           <div className="meta">
-            <span>{(project.level).charAt(0).toUpperCase() + project.level.slice(1)}</span>
+            <span>
+              {project.level.charAt(0).toUpperCase() + project.level.slice(1)}
+            </span>
             <span>•</span>
             <span>{project.user.firstname + " " + project.user.lastname}</span>
           </div>
 
-          <div className="project-user">
-            <img src={project.user?.avatar} alt={project.user?.firstname + " " + project.user?.lastname} />
-            <p>{project.user?.firstname + " " + project.user?.lastname}</p>
-          </div>
+          <Link to={`/users/profile/${project.user._id}`}>
+            <div className="project-user">
+              <img
+                src={project.user?.avatar}
+                alt={project.user?.firstname + " " + project.user?.lastname}
+              />
+              <p>{project.user?.firstname + " " + project.user?.lastname}</p>
+            </div>
+          </Link>
         </div>
       </div>
     </>

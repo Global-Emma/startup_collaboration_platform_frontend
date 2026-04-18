@@ -1,14 +1,47 @@
 import "../styles/user-dashboard.css";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { ChevronUp, ChevronDown } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import DashboardNav from "../components/DashboardNav";
+import api from "../utils/axios";
+import socket from "../utils/socket";
 
 const UserDashboard = ({ user, allProjects }) => {
   const navigate = useNavigate()
   const projects = useMemo(() => user?.projects || [], [user?.projects]);
   const applications = user?.applications || [];
-  const [notificationsOpen, setNotificationsOpen] = useState(true);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  // const [loading, setLoading] = useState(false);
+
+  const unreadCount = notifications.filter(n => !n.isRead).length;
+  const toggleNotifications = () => setNotificationsOpen((prev) => !prev);
+
+  // Fetch notifications
+ 
+
+  // Socket listener for real-time notifications
+  useEffect(() => {
+     const fetchNotifications = async () => {
+    try {
+      const res = await api.get('/api/notifications');
+      setNotifications(res.data.data);
+    } catch (error) {
+      console.error('Error fetching notifications:', error);
+    }
+  };
+    if (user) {
+      fetchNotifications();
+
+      socket.on("notification", (notification) => {
+        setNotifications(prev => [notification, ...prev]);
+      });
+
+      return () => {
+        socket.off("notification");
+      };
+    }
+  }, [user]);
 
   const activeProjects = useMemo(() => {
    return projects.filter(
@@ -53,7 +86,16 @@ const cancelledProjects = useMemo(() => {
               <input placeholder="Search..." />
 
               <div className="top-actions">
-                <span>🔔</span>
+                <button
+                  className="notification-bell"
+                  type="button"
+                  onClick={toggleNotifications}
+                >
+                  🔔
+                  {unreadCount > 0 && (
+                    <span className="notification-badge">{unreadCount}</span>
+                  )}
+                </button>
 
                 <div className="user">
                   <img src={user.avatar} alt="employer_image" />
@@ -151,9 +193,15 @@ const cancelledProjects = useMemo(() => {
 
               {notificationsOpen && (
                 <div className="notifications-body">
-                  <p>New project posted</p>
-                  <p>Your application was viewed</p>
-                  <p>You got a new message</p>
+                  {notifications.length === 0 ? (
+                    <p>No notifications yet</p>
+                  ) : (
+                    notifications.slice(0, 10).map((notification, index) => (
+                      <p key={notification._id || index} className={notification.isRead ? 'read' : 'unread'}>
+                        {notification.message}
+                      </p>
+                    ))
+                  )}
                 </div>
               )}
             </div>
@@ -168,8 +216,20 @@ const cancelledProjects = useMemo(() => {
           <div className="dashboard-main">
             {/* HEADER */}
             <div className="dashboard-header">
-              <h1>Dashboard</h1>
-              <p>{`Welcome back, ${user?.username || user?.firstname || "there"}! Here's your activity overview.`}</p>
+              <div>
+                <h1>Dashboard</h1>
+                <p>{`Welcome back, ${user?.username || user?.firstname || "there"}! Here's your activity overview.`}</p>
+              </div>
+              <button
+                className="notification-bell"
+                type="button"
+                onClick={toggleNotifications}
+              >
+                🔔
+                {unreadCount > 0 && (
+                  <span className="notification-badge">{unreadCount}</span>
+                )}
+              </button>
             </div>
 
             {/* STATS */}
@@ -253,9 +313,15 @@ const cancelledProjects = useMemo(() => {
 
             {notificationsOpen && (
               <div className="notifications-body">
-                <p>New project posted</p>
-                <p>Your application was viewed</p>
-                <p>You got a new message</p>
+                {notifications.length === 0 ? (
+                  <p>No notifications yet</p>
+                ) : (
+                  notifications.slice(0, 10).map((notification, index) => (
+                    <p key={notification._id || index} className={notification.isRead ? 'read' : 'unread'}>
+                      {notification.message}
+                    </p>
+                  ))
+                )}
               </div>
             )}
           </div>

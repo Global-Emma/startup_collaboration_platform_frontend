@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import api from "../utils/axios";
 import { useState } from "react";
 
-const ProjectDetails = ({user}) => {
+const ProjectDetails = ({ user }) => {
   const { id } = useParams();
 
   const [project, setProject] = useState();
@@ -43,7 +43,10 @@ const ProjectDetails = ({user}) => {
         <img src={project?.image} alt={project?.title} />
 
         <div className="details-info">
-          <Link style={{textDecoration: 'none'}} to={`/services/${project.service._id}`}>
+          <Link
+            style={{ textDecoration: "none" }}
+            to={`/services/${project.service._id}`}
+          >
             <span className="service">
               {project?.service?.name || project?.service}
             </span>
@@ -75,10 +78,12 @@ const ProjectDetails = ({user}) => {
 
         {/* RIGHT SIDEBAR */}
         <div className="details-sidebar">
-          <div className="poster">
-            <img src={project?.user?.avatar} />
-            <p>{project?.user?.firstname}</p>
-          </div>
+          <Link to={`/users/profile/${project.user._id}`}>
+            <div className="poster">
+              <img src={project?.user?.avatar} />
+              <p>{project?.user?.firstname}</p>
+            </div>
+          </Link>
 
           <Link to={`/projects/apply/${project._id}`} className="">
             <button className="apply-btn">
@@ -86,14 +91,19 @@ const ProjectDetails = ({user}) => {
             </button>
           </Link>
 
-          <button className="save-btn" onClick={async()=>{
-            try {
-              const response = await api.put(`/api/projects/save/${id}`);
-              console.log(response)
-            } catch (error) {
-              console.log(error)
-            }
-          }}>Save Project</button>
+          <button
+            className="save-btn"
+            onClick={async () => {
+              try {
+                const response = await api.put(`/api/projects/save/${id}`);
+                console.log(response);
+              } catch (error) {
+                console.log(error);
+              }
+            }}
+          >
+            Save Project
+          </button>
         </div>
       </div>
     </section>
