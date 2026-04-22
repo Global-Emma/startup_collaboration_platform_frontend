@@ -3,9 +3,11 @@ import NavLinks from "./NavLinks";
 import UserNav from "./UserNav";
 import { Link } from "react-router-dom";
 import { useApp } from "../utils/useApp";
+import { LucideAlignCenterHorizontal, X } from "lucide-react";
 
 const Navbar = ({ user }) => {
-  const [scroll, setScroll] = useState(false);
+  const [scroll, setScroll] = useState(true);
+  const [mobileMenu, setMobileMenu] = useState(false);
   const { logout } = useApp()
 
   useEffect(() => {
@@ -26,11 +28,14 @@ const Navbar = ({ user }) => {
   return (
     <header className={scroll ? "navbar scrolled" : "navbar"}>
       <nav className="nav-container">
+        <div className="menu-icon">
+          {mobileMenu ? <LucideAlignCenterHorizontal onClick={() => setMobileMenu(false)} /> : <X onClick={() => setMobileMenu(true)} />}
+        </div>
         <div className="logo">
           <img src="/images/logo.png" alt="logo" />
         </div>
         
-        <NavLinks user={user} />
+        <NavLinks user={user} mobile={mobileMenu} />
 
         {user ? (
           <UserNav

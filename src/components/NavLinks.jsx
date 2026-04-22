@@ -1,6 +1,6 @@
 import { useResolvedPath } from "react-router-dom";
 
-const NavLinks = ({ user }) => {
+const NavLinks = ({ user, mobile }) => {
   const path = useResolvedPath();
 
   const pathname = path.pathname;
@@ -29,7 +29,8 @@ const NavLinks = ({ user }) => {
   ];
 
   return (
-    <ul className="nav-links">
+    <div className="navlinks-container">
+      <ul className="nav-links">
       {navlinks.map((navlink, i) => {
         return (
           <li className={pathname === navlink.link ? "active" : ""} key={i}>
@@ -38,6 +39,17 @@ const NavLinks = ({ user }) => {
         );
       })}
     </ul>
+
+      <ul className={"mobile-nav-links" + (mobile ? "" : " hidden")}>
+      {navlinks.map((navlink, i) => {
+        return (
+          <li className={pathname === navlink.link ? "active" : ""} key={i}>
+            <a href={navlink.link}>{navlink.name}</a>
+          </li>
+        );
+      })}
+    </ul>
+    </div>
   );
 };
 

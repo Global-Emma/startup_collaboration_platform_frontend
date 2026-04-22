@@ -24,11 +24,13 @@ import EditProject from "./pages/EditProject";
 import MessagesPage from "./dashboard_pages/MessagesPage";
 import { useEffect } from "react";
 import socket from "./utils/socket";
+import Loading from "./components/LoadingPage";
 
 function App() {
   const { user } = useApp();
   const { services } = useApp();
   const { projects } = useApp();
+  const { loading } = useApp();
 
   // Run Socket
   useEffect(() => {
@@ -44,12 +46,16 @@ function App() {
     return () => socket.disconnect();
   }, [user]);
 
+  if(loading){
+    return <Loading />
+  }
+
   return (
     <Routes>
       <Route
         path="/"
         element={
-          <Homepage user={user} services={services} projects={projects} />
+          <Homepage user={user} services={services} projects={projects} loading={loading} />
         }
       />
       <Route path="/sign-up" element={<SignUp />} />

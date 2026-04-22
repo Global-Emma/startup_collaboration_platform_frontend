@@ -1,9 +1,10 @@
 import "../styles/signup.css";
 import { useState } from "react";
-import { Eye, EyeOff, ArrowUpRight } from "lucide-react";
+import { Eye, EyeOff, ArrowUpRight, Loader, Loader2, LucideLoader2, LucideLoaderCircle, LucideLoader } from "lucide-react";
 import api from "../utils/axios";
 
 const SignUp = () => {
+  const [loading, setLoading] = useState(false); 
   const [role, setRole] = useState("freelancer");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -51,6 +52,8 @@ const SignUp = () => {
       return;
     }
 
+    setLoading(true);
+
     try {
       // Submit form data to backend
       const response = await api.post("/api/auth/register", {
@@ -64,6 +67,8 @@ const SignUp = () => {
       }
     } catch (error) {
       console.error("Error registering user:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -187,8 +192,9 @@ const SignUp = () => {
             </label>
 
             {/* Submit */}
-            <button type="submit" className="register-btn">
-              Register <ArrowUpRight size={18} />
+            <button type="submit" className="register-btn" disabled={loading}>
+              Register
+              {loading ? <LucideLoader className="loader" size={18} /> : <ArrowUpRight size={18} />}  
             </button>
           </form>
         </div>
