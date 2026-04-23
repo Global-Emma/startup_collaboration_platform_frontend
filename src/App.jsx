@@ -25,12 +25,16 @@ import MessagesPage from "./dashboard_pages/MessagesPage";
 import { useEffect } from "react";
 import socket from "./utils/socket";
 import Loading from "./components/LoadingPage";
+import ErrorMessage from "./components/ErrorMessage";
+import EditProfile from "./pages/EditUser";
 
 function App() {
   const { user } = useApp();
   const { services } = useApp();
   const { projects } = useApp();
   const { loading } = useApp();
+  const { error } = useApp();
+  const { setError } = useApp();
 
   // Run Socket
   useEffect(() => {
@@ -55,11 +59,11 @@ function App() {
       <Route
         path="/"
         element={
-          <Homepage user={user} services={services} projects={projects} loading={loading} />
+          <Homepage error={error} setError={setError} user={user} services={services} projects={projects} loading={loading} />
         }
       />
       <Route path="/sign-up" element={<SignUp />} />
-      <Route path="/sign-in" element={<SignIn />} />
+      <Route path="/sign-in" element={<SignIn error={error} setError={setError} />} />
       <Route
         path="/projects"
         element={<ProjectsPage projects={projects} user={user} />}
@@ -85,6 +89,7 @@ function App() {
         element={<UserDashboard user={user} allProjects={projects} />}
       />
       <Route path="/profile" element={<UserProfile user={user} />} />
+      <Route path="/edit-profile" element={<EditProfile user={user} />} />
       <Route
         path="/dashboard/messages"
         element={<MessagesPage user={user} />}

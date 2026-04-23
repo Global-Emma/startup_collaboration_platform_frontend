@@ -3,8 +3,11 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
 import api from "../utils/axios";
+import { isAxiosError } from "axios";
+import ErrorMessage from "../components/ErrorMessage";
 
-const CreateProjectPage = ({services}) => {
+const CreateProjectPage = ({ services }) => {
+  const [error, setError] = useState(null);
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -24,7 +27,6 @@ const CreateProjectPage = ({services}) => {
     const { name, value, files } = e.target;
 
     if (name === "image") {
-      
       setForm({ ...form, image: files[0] });
     } else {
       setForm({ ...form, [name]: value });
@@ -52,53 +54,65 @@ const CreateProjectPage = ({services}) => {
     e.preventDefault();
 
     const formData = new FormData();
-    
 
-    formData.append('title', form.title);
-    formData.append('description', form.description);
-    formData.append('price', form.price);
-    formData.append('service', form.service);
-    formData.append('level', form.level);
-    formData.append('duration', form.duration);
-    formData.append('location', form.location);
+    formData.append("title", form.title);
+    formData.append("description", form.description);
+    formData.append("price", form.price);
+    formData.append("service", form.service);
+    formData.append("level", form.level);
+    formData.append("duration", form.duration);
+    formData.append("location", form.location);
 
     if (form.image) {
-      formData.append('file', form.image);
+      formData.append("file", form.image);
     }
 
     skills.forEach((skill) => {
-      formData.append('skills', skill);
+      formData.append("skills", skill);
     });
 
-    const response = await api.post('/api/projects', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-
-    const responseData = response.data.data;
-
-    if(responseData) {
-      alert("Project created successfully!");
-      setForm({
-        title: "",
-        description: "",
-        price: "",
-        service: "",
-        level: "",
-        duration: "",
-        location: "",
-        image: null,
+    try {
+      const response = await api.post("/api/projects", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
-      setSkills([]);
-    }
 
+      const responseData = response.data.data;
+
+      if (responseData) {
+        alert("Project created successfully!");
+        setForm({
+          title: "",
+          description: "",
+          price: "",
+          service: "",
+          level: "",
+          duration: "",
+          location: "",
+          image: null,
+        });
+        setSkills([]);
+      }
+    } catch (error) {
+      if (isAxiosError(error)) {
+        setError(error.response?.data || error.message);
+      }
+    }
   };
 
   const header = {
     text: "Create Project",
     subtext: "Post a new project and connect with top talents.",
   };
+
+  if (error) {
+    setTimeout(() => {
+      setError(null);
+    }, 5000);
+
+    return <ErrorMessage error={error} />;
+  }
 
   return (
     <section className="create-project">
@@ -132,10 +146,9 @@ const CreateProjectPage = ({services}) => {
         {/* SERVICE */}
         <select name="service" onChange={handleChange}>
           <option value="">Select Service</option>
-          {services.map((service)=>{
-            return <option key={service._id}>{service.name}</option>
+          {services.map((service) => {
+            return <option key={service._id}>{service.name}</option>;
           })}
-          
         </select>
 
         {/* LEVEL */}

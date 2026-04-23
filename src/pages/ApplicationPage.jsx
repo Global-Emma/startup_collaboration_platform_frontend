@@ -5,18 +5,26 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
+import { isAxiosError } from "axios";
+import ErrorMessage from "../components/ErrorMessage";
 
-const ApplicationPage = ({user}) => {
+const ApplicationPage = ({ user }) => {
   const { id } = useParams();
-
+  const [error, setError] = useState(null);
   const [project, setProject] = useState();
   useEffect(() => {
     const fetchProject = async () => {
-      const response = await api.get(`/api/projects/${id}`);
-      const data = response.data.data;
+      try {
+        const response = await api.get(`/api/projects/${id}`);
+        const data = response.data.data;
 
-      // API returns an array for single project endpoint, keep single object
-      setProject(Array.isArray(data) ? data[0] : data);
+        // API returns an array for single project endpoint, keep single object
+        setProject(Array.isArray(data) ? data[0] : data);
+      } catch (error) {
+        if (isAxiosError(error)) {
+          setError(error.response?.data || error.message);
+        }
+      }
     };
 
     fetchProject();
@@ -54,30 +62,44 @@ const ApplicationPage = ({user}) => {
       formData.append("file", form.cv);
     }
 
-    const response = await api.post(`/api/apply/${id}`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-
-    if (response.data.success) {
-      setShowToast(true);
-
-      setTimeout(() => {
-        setShowToast(false);
-      }, 3000);
-      setForm({
-        proposal: "",
-        bid: "",
-        delivery: "",
-        cv: null,
+    try {
+      const response = await api.post(`/api/apply/${id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
+
+      if (response.data.success) {
+        setShowToast(true);
+
+        setTimeout(() => {
+          setShowToast(false);
+        }, 3000);
+        setForm({
+          proposal: "",
+          bid: "",
+          delivery: "",
+          cv: null,
+        });
+      }
+    } catch (error) {
+      if (isAxiosError(error)) {
+        setError(error.response?.data || error.message);
+      }
     }
   };
 
-  const header ={
+  const header = {
     text: `Apply for ${project?.title} Project`,
     subText: "",
+  };
+
+  if (error) {
+    setTimeout(() => {
+      setError(null);
+    }, 5000);
+
+    return <ErrorMessage error={error} />;
   }
 
   return (

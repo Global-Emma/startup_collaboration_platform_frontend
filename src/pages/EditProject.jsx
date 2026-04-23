@@ -4,8 +4,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "../utils/axios";
 import Header from "../components/Header";
 import DashboardNav from "../components/DashboardNav";
+import { isAxiosError } from "axios";
+import ErrorMessage from "../components/ErrorMessage";
 
 const EditProject = ({ user, services, allProjects }) => {
+
+  const [error, setError] = useState(null);
+
   const { id } = useParams();
   const navigate = useNavigate()
   const currentProject = allProjects.find((project) => project._id === id);
@@ -88,7 +93,9 @@ const EditProject = ({ user, services, allProjects }) => {
         navigate('/dashboard/projects')
       }
     } catch (error) {
-      console.log(error);
+      if(isAxiosError(error)){
+        setError(error.response?.data || error.message);
+      }
     }
   };
 
@@ -96,6 +103,15 @@ const EditProject = ({ user, services, allProjects }) => {
     text:'Edit Project',
     subText: 'Update your project details below'
   }
+
+  if (error) {
+    setTimeout(() => {
+      setError(null);
+    }, 5000);
+
+    return <ErrorMessage error={error} />;
+  }
+
 
   return (
     <div className="edit-project-page">

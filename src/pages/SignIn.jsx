@@ -2,12 +2,17 @@ import "../styles/signin.css";
 import { useState } from "react";
 import { Eye, EyeOff, ArrowUpRight } from "lucide-react";
 import { useApp } from "../utils/useApp";
+import ErrorMessage from "../components/ErrorMessage";
+import { isAxiosError } from "axios";
 // import SignUp from "./SignUp";
 // import api from "../utils/axios";
 // import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
-  const {login} = useApp()
+  const { login } = useApp();
+
+  const [error, setError] = useState(null);
+
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -27,13 +32,27 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    login(formData)
+    try {
+      login(formData);
+    } catch (error) {
+      if(isAxiosError(error)){
+        setError(error.response?.data || error.message);
+      }
+    }
   };
 
   const handleGoogleSignIn = () => {
     console.log("Google Sign In");
     // later connect to Firebase / OAuth
   };
+
+  if (error) {
+    setTimeout(() => {
+      setError(null);
+    }, 5000);
+
+    return <ErrorMessage error={error} />;
+  }
 
   return (
     <section className="login">

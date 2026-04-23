@@ -1,0 +1,108 @@
+.edit-profile-page {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.edit-profile-container {
+  width: 100%;
+  max-width: 800px;
+  background: var(--bg);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.edit-profile-container h1 {
+  margin-bottom: 5px;
+}
+
+.edit-profile-container p {
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+/* FORM */
+.edit-profile-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* INPUTS */
+.edit-profile-container input,
+.edit-profile-container textarea {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+}
+
+textarea {
+  min-height: 120px;
+}
+
+/* AVATAR */
+.avatar-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar-section img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+/* SKILLS */
+.skills-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skills-input {
+  display: flex;
+  gap: 10px;
+}
+
+.skills-input button {
+  padding: 10px 15px;
+  background: var(--accent);
+  border: none;
+  color: white;
+  border-radius: 8px;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skills-list span {
+  background: var(--accent);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  gap: 8px;
+}
+
+/* BUTTON */
+button[type="submit"] {
+  padding: 15px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .edit-profile-page {
+    padding: 20px;
+  }
+}

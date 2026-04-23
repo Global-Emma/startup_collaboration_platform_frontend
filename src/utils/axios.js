@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { isAxiosError } from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -17,7 +17,7 @@ api.interceptors.request.use(
     return config;
   },
   function (error) {
-    console.error("Request error:", error);
+    localStorage.setItem('error', error.response.message || error.message)
     return Promise.reject(error);
   },
 );
@@ -29,8 +29,8 @@ api.interceptors.response.use(
     const originalRequest = error.config;
 
     const isUnauthorized =
-      error.response?.status === 401 ||
-      error.response?.data?.message === "Invalid Token" ||
+      error.response?.status === 401 &&
+      error.response?.data?.message === "Invalid Token" &&
       error.response?.data?.message === "Not authorized, no token provided";
 
     if (isUnauthorized && !originalRequest._retry) {
@@ -65,7 +65,11 @@ api.interceptors.response.use(
           localStorage.removeItem("accessToken");
           localStorage.removeItem("login");
 
-          window.location.href = "/sign-in";
+          if(isAxiosError(refreshError) && refreshError.response?.status === 401) {
+            localStorage.setItem('error', refreshError.response.data.message || refreshError.message);
+          }
+
+        window.location.href = "/sign-in";
         }
 
         return Promise.reject(refreshError);

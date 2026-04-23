@@ -6,18 +6,28 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import api from "../utils/axios";
 import { useState } from "react";
+import { isAxiosError } from "axios";
+import ErrorMessage from "../components/ErrorMessage";
 
 const ProjectDetails = ({ user }) => {
   const { id } = useParams();
 
+  const [error, setError] = useState(null);
+
   const [project, setProject] = useState();
   useEffect(() => {
     const fetchProject = async () => {
-      const response = await api.get(`/api/projects/${id}`);
-      const data = response.data.data;
+      try {
+        const response = await api.get(`/api/projects/${id}`);
+        const data = response.data.data;
 
-      // API returns an array for single project endpoint, keep single object
-      setProject(Array.isArray(data) ? data[0] : data);
+        // API returns an array for single project endpoint, keep single object
+        setProject(Array.isArray(data) ? data[0] : data);
+      } catch (error) {
+        if (isAxiosError(error)) {
+          setError(error.response?.data || error.message);
+        }
+      }
     };
 
     fetchProject();
@@ -30,6 +40,14 @@ const ProjectDetails = ({ user }) => {
 
   if (!project) {
     return <h2>Project not found</h2>;
+  }
+
+  if (error) {
+    setTimeout(() => {
+      setError(null);
+    }, 5000);
+
+    return <ErrorMessage error={error} />;
   }
 
   return (

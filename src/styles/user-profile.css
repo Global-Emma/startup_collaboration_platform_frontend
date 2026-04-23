@@ -81,7 +81,7 @@
   padding: 10px 16px;
   border-radius: 25px;
   border: 1px solid var(--border);
-  background: transparent;
+  background: var(--text);
   cursor: pointer;
 }
 
