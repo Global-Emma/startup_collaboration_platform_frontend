@@ -30,8 +30,8 @@ api.interceptors.response.use(
 
     const isUnauthorized =
       error.response?.status === 401 &&
-      error.response?.data?.message === "Invalid Token" &&
-      error.response?.data?.message === "Not authorized, no token provided";
+      error.response?.data?.message === "Invalid Token" ||
+      error.response?.status === 401 && error.response?.data?.message === "Not authorized, no token provided";
 
     if (isUnauthorized && !originalRequest._retry) {
       originalRequest._retry = true;
@@ -43,7 +43,7 @@ api.interceptors.response.use(
 
         // Save token
         localStorage.setItem("accessToken", JSON.stringify(newAccessToken));
-        localStorage.setItem("login", true);
+        localStorage.setItem("login", "true");
 
         // Attach new token safely
         if (!originalRequest.headers) {
@@ -69,7 +69,6 @@ api.interceptors.response.use(
             localStorage.setItem('error', refreshError.response.data.message || refreshError.message);
           }
 
-        window.location.href = "/sign-in";
         }
 
         return Promise.reject(refreshError);

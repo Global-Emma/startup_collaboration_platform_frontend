@@ -168,6 +168,7 @@
 
   .filter.active {
     left: 0;
+    margin-top: 100px;
   }
 
   .filter-btn {

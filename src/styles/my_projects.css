@@ -135,6 +135,12 @@
   grid-column: 1/-1;
 }
 
+@media (max-width: 900px) {
+  .my-projects {
+    margin-left: 120px
+  }
+}
+
 /* RESPONSIVE */
 @media (max-width: 600px) {
   .my-projects .projects-header-box {
@@ -310,7 +316,7 @@
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .freelancer-projects-page {
-    margin-left: 0;
+    margin-left: 120px;
     padding: 20px;
   }
 

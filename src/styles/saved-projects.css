@@ -151,7 +151,7 @@
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .saved-projects-page {
-    margin-left: 0;
+    margin-left: 120px;
     padding: 20px;
   }
 

@@ -84,6 +84,105 @@ const UsersPage = ({ user, allProjects }) => {
     <div className="users-page">
       <Navbar user={user} />
       {/* HEADER */}
+      {!user && (
+        <div className="freelancers-page">
+          <div className="users-header">
+            <div>
+              <h1>Discover Talent</h1>
+              <p>
+                Browse skilled freelancers and find the right fit for your
+                project
+              </p>
+            </div>
+          </div>
+
+          {/* FILTERS */}
+          <div className="users-filters">
+            <input
+              type="text"
+              placeholder="Search freelancers..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+
+            <select
+              value={skillFilter}
+              onChange={(e) => setSkillFilter(e.target.value)}
+            >
+              {allSkills.map((skill, i) => (
+                <option key={i} value={skill}>
+                  {skill}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* USERS GRID */}
+          <div className="users-grid">
+            {users.length === 0 ? (
+              <div className="empty-users">
+                <h3>No Freelancers Found</h3>
+                <p>Try adjusting your search/filter</p>
+              </div>
+            ) : (
+              users.map((user) => {
+                return (
+                  <div className="user-card" key={user._id}>
+                    {/* TOP */}
+                    <div className="user-top">
+                      <img
+                        src={user.avatar || "/images/default-avatar.png"}
+                        alt=""
+                      />
+
+                      <div>
+                        <h3>{user.username}</h3>
+                        <p>
+                          {user.firstname} {user.lastname}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* BIO */}
+                    <p className="user-bio">
+                      {user.bio?.slice(0, 90) ||
+                        "Experienced freelancer available for work."}
+                    </p>
+
+                    {/* SKILLS */}
+                    <div className="user-skills">
+                      {user.skills?.slice(0, 4).map((skill, i) => (
+                        <span key={i}>{skill}</span>
+                      ))}
+                    </div>
+
+                    {/* STATS */}
+                    <div className="user-stats">
+                      <span>{user.projects?.length || 0} Projects</span>
+
+                      <span>{user.rating || "5.0"} ⭐</span>
+                    </div>
+
+                    {/* ACTIONS */}
+                    <div className="user-actions">
+                      <Link to={`/users/profile/${user._id}`}>
+                        <button>View Profile</button>
+                      </Link>
+
+                      <button
+                        onClick={() => handleStartConversation(user._id)}
+                        className="message-btn"
+                      >
+                        Message
+                      </button>
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </div>
+      )}
       {user.role === "employer" ? (
         <div className="freelancers-page">
           <div className="users-header">

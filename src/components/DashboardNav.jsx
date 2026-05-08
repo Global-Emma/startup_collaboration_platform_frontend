@@ -37,11 +37,6 @@ const userNavlinks = [
     icon: <Bookmark size={18} />,
     link: "/dashboard/saved-projects",
   },
-  {
-    name: "Settings",
-    icon: <Settings size={18} />,
-    link: "/dashboard/settings",
-  },
 ];
 
 const employerNavlinks = [
@@ -65,17 +60,12 @@ const employerNavlinks = [
     icon: <MessageCircle size={18} />,
     link: "/dashboard/messages",
   },
-  {
-    name: "Settings",
-    icon: <Settings size={18} />,
-    link: "/dashboard/settings",
-  },
 ];
 
 
 const DashboardNav = ({ user }) => {
   const pathname = useResolvedPath().pathname;
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <>
       <aside className={`sidebar ${sidebarOpen ? "open" : "collapsed"}`}>

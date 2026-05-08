@@ -273,7 +273,7 @@
   }
 
   .dashboard-main {
-    margin-left: 80px;
+    margin-left: 120px;
   }
 
   .stats {
@@ -440,6 +440,10 @@ button{
     width: 100%;
     display: flex;
     overflow-x: auto;
+  }
+
+  .emp-main {
+    margin-left: 120px;
   }
 
   .emp-stats {

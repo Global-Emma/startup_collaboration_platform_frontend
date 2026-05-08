@@ -66,7 +66,7 @@ function App() {
       <Route path="/sign-in" element={<SignIn error={error} setError={setError} />} />
       <Route
         path="/projects"
-        element={<ProjectsPage projects={projects} user={user} />}
+        element={<ProjectsPage projects={projects} user={user} services={services} />}
       />
       <Route path="/projects/:id" element={<ProjectDetails user={user} />} />
       <Route

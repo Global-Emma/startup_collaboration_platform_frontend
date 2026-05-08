@@ -7,34 +7,33 @@ import api from "../utils/axios";
 import socket from "../utils/socket";
 
 const UserDashboard = ({ user, allProjects }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const projects = useMemo(() => user?.projects || [], [user?.projects]);
   const applications = user?.applications || [];
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
   // const [loading, setLoading] = useState(false);
 
-  const unreadCount = notifications.filter(n => !n.isRead).length;
+  const unreadCount = notifications.filter((n) => !n.isRead).length;
   const toggleNotifications = () => setNotificationsOpen((prev) => !prev);
 
   // Fetch notifications
- 
 
   // Socket listener for real-time notifications
   useEffect(() => {
-     const fetchNotifications = async () => {
-    try {
-      const res = await api.get('/api/notifications');
-      setNotifications(res.data.data);
-    } catch (error) {
-      console.error('Error fetching notifications:', error);
-    }
-  };
+    const fetchNotifications = async () => {
+      try {
+        const res = await api.get("/api/notifications");
+        setNotifications(res.data.data);
+      } catch (error) {
+        console.error("Error fetching notifications:", error);
+      }
+    };
     if (user) {
       fetchNotifications();
 
       socket.on("notification", (notification) => {
-        setNotifications(prev => [notification, ...prev]);
+        setNotifications((prev) => [notification, ...prev]);
       });
 
       return () => {
@@ -44,22 +43,16 @@ const UserDashboard = ({ user, allProjects }) => {
   }, [user]);
 
   const activeProjects = useMemo(() => {
-   return projects.filter(
-      (project) => project.status === "active"
-   ).length;
-}, [projects]);
+    return projects.filter((project) => project.status === "active").length;
+  }, [projects]);
 
-const completedProjects = useMemo(() => {
-   return projects.filter(
-      (project) => project.status === "completed"
-   ).length;
-}, [projects]);
+  const completedProjects = useMemo(() => {
+    return projects.filter((project) => project.status === "completed").length;
+  }, [projects]);
 
-const cancelledProjects = useMemo(() => {
-   return projects.filter(
-      (project) => project.status === "cancelled"
-   ).length;
-}, [projects]);
+  const cancelledProjects = useMemo(() => {
+    return projects.filter((project) => project.status === "cancelled").length;
+  }, [projects]);
 
   const empProjects =
     allProjects?.filter((p) => p?.user?._id === user?._id) || [];
@@ -197,7 +190,10 @@ const cancelledProjects = useMemo(() => {
                     <p>No notifications yet</p>
                   ) : (
                     notifications.slice(0, 10).map((notification, index) => (
-                      <p key={notification._id || index} className={notification.isRead ? 'read' : 'unread'}>
+                      <p
+                        key={notification._id || index}
+                        className={notification.isRead ? "read" : "unread"}
+                      >
                         {notification.message}
                       </p>
                     ))
@@ -287,7 +283,11 @@ const cancelledProjects = useMemo(() => {
                         <h4>{a.project?.title}</h4>
                         <span>{a.status}</span>
                       </div>
-                      <button onClick={()=> navigate('/dashboard/applications')}>Details</button>
+                      <button
+                        onClick={() => navigate("/dashboard/applications")}
+                      >
+                        Details
+                      </button>
                     </div>
                   ))
                 )}
@@ -317,7 +317,10 @@ const cancelledProjects = useMemo(() => {
                   <p>No notifications yet</p>
                 ) : (
                   notifications.slice(0, 10).map((notification, index) => (
-                    <p key={notification._id || index} className={notification.isRead ? 'read' : 'unread'}>
+                    <p
+                      key={notification._id || index}
+                      className={notification.isRead ? "read" : "unread"}
+                    >
                       {notification.message}
                     </p>
                   ))

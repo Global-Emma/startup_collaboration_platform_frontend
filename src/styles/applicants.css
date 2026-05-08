@@ -163,7 +163,7 @@
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .applicants-page {
-    margin-left: 0;
+    margin-left: 120px;
     flex: 1;
     padding: 20px;
   }
@@ -326,7 +326,7 @@
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .applications-page {
-    margin-left: 0;
+    margin-left: 120px !important;
     padding: 20px;
   }
 

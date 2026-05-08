@@ -8,6 +8,14 @@ import Header from "../components/Header";
 
 const ProjectsPage = ({projects, services, user}) => {
   const [showFilter, setShowFilter] = useState(false);
+  const [selectedService, setSelectedService] = useState("");
+  const [selectedLevel, setSelectedLevel] = useState("");
+
+  const filteredProjects = projects?.filter((project) => {
+    const matchesService = !selectedService || project.service?.name.toLowerCase().includes(selectedService.toLowerCase());
+    const matchesLevel = !selectedLevel || project.level.toLowerCase().includes(selectedLevel.toLowerCase());
+    return matchesService && matchesLevel;
+  });
 
   const header = {
     text: 'Explore Projects',
@@ -30,17 +38,20 @@ const ProjectsPage = ({projects, services, user}) => {
         <div className={`filter ${showFilter ? "active" : ""}`}>
           <h3>Filters</h3>
 
-          <select>
+          <select onChange ={(e) => setSelectedService(e.target.value)}>
+            <option value="">Select Service</option>
             {services?.map((service) => (
-              <option key={service._id}>{service.name}</option>
+              <option key={service._id} value={service.name}>
+                {service.name}
+              </option>
             ))}
           </select>
 
-          <select>
-            <option>Experience Level</option>
-            <option>Beginner</option>
-            <option>Intermediate</option>
-            <option>Advanced</option>
+          <select onChange ={(e) => setSelectedLevel(e.target.value)}>
+            <option value="">Experience Level</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
           </select>
 
           <button onClick={() => setShowFilter(false)}>Apply</button>
@@ -53,7 +64,7 @@ const ProjectsPage = ({projects, services, user}) => {
 
         {/* Projects Grid */}
         <div className="projects-grid">
-          {projects?.map((project) => {
+          {filteredProjects?.map((project) => {
             return (
               <Projects project={project} key={project._id} />
             )
