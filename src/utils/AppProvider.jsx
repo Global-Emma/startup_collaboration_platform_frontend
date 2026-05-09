@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import api from "./axios";
 import { AppContext } from "./AppContext";
 import { isAxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AppProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -9,7 +10,8 @@ const AppProvider = ({ children }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const navigate = useNavigate();
+  
   // Load user on refresh
   useEffect(() => {
     setLoading(true);
@@ -92,7 +94,7 @@ const AppProvider = ({ children }) => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("login");
         setUser(null);
-        window.location.href = "/sign-in";
+        navigate("/sign-in");
         alert("User Logged Out Successfully");
       }
     } catch (error) {
