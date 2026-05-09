@@ -1,4 +1,4 @@
-import { useResolvedPath } from "react-router-dom";
+import { Link, useResolvedPath } from "react-router-dom";
 
 const NavLinks = ({ user, mobile }) => {
   const path = useResolvedPath();
