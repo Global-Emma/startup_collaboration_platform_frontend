@@ -2,8 +2,10 @@ import "../styles/signup.css";
 import { useState } from "react";
 import { Eye, EyeOff, ArrowUpRight, Loader, Loader2, LucideLoader2, LucideLoaderCircle, LucideLoader } from "lucide-react";
 import api from "../utils/axios";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(false); 
   const [role, setRole] = useState("freelancer");
   const [showPassword, setShowPassword] = useState(false);
@@ -63,7 +65,7 @@ const SignUp = () => {
       });
       if (response.data.success) {
         alert("Registration successful! Please log in.");
-        window.location.href = "/sign-in";
+        navigate('/sign-in');
       }
     } catch (error) {
       console.error("Error registering user:", error);

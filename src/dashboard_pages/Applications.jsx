@@ -2,10 +2,11 @@ import "../styles/applicants.css";
 import { useState } from "react";
 import DashboardNav from "../components/DashboardNav";
 import api from "../utils/axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Applications = ({ user, allProjects }) => {
   const [selectedProjectId, setSelectedProjectId] = useState(null);
+  const navigate = useNavigate()
 
   // Get employer projects
   const projects = allProjects.filter((p) => p?.user?._id === user?._id);
@@ -38,7 +39,7 @@ const Applications = ({ user, allProjects }) => {
     try {
       const response = await api.delete(`/api/apply/${id}`);
       if (response.data.success) {
-        window.location.href = "/dashboard";
+        navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);
