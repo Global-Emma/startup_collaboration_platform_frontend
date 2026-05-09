@@ -123,7 +123,7 @@
 }
 
 .recent-project-item h4{
-  color: var(text-h) !important
+  color: var(--text-h) !important
 }
 
 /* BUTTON */
