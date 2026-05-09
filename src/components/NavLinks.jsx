@@ -34,7 +34,7 @@ const NavLinks = ({ user, mobile }) => {
       {navlinks.map((navlink, i) => {
         return (
           <li className={pathname === navlink.link ? "active" : ""} key={i}>
-            <a href={navlink.link}>{navlink.name}</a>
+            <Link to={navlink.link}>{navlink.name}</Link>
           </li>
         );
       })}
@@ -44,7 +44,7 @@ const NavLinks = ({ user, mobile }) => {
       {navlinks.map((navlink, i) => {
         return (
           <li className={pathname === navlink.link ? "active" : ""} key={i}>
-            <a href={navlink.link}>{navlink.name}</a>
+            <Link to={navlink.link}>{navlink.name}</Link>
           </li>
         );
       })}
