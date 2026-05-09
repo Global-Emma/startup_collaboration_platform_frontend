@@ -1,10 +1,11 @@
 import "../styles/saved-projects.css";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import DashboardNav from "../components/DashboardNav";
 import api from "../utils/axios";
 
 const SavedProjects = ({ user }) => {
+  const [update, setUpdate] = useState(0)
   const savedProjects = useMemo(() => {
     return user?.savedProjects || [];
   }, [user?.savedProjects]);
@@ -13,7 +14,7 @@ const SavedProjects = ({ user }) => {
     try {
       const response = await api.delete(`/api/projects/save/${id}`)
       if(response.success){
-        window.location.reload()
+        setUpdate(update + 1)
       }
     } catch (error) {
       console.log(error)
