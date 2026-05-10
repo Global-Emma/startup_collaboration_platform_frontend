@@ -71,7 +71,7 @@ function App() {
       <Route path="/projects/:id" element={<ProjectDetails user={user} />} />
       <Route
         path="/projects/create-project"
-        element={<CreateProjectPage services={services} />}
+        element={<CreateProjectPage user={user} services={services} />}
       />
       <Route
         path="/services"

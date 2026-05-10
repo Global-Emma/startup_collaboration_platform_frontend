@@ -88,6 +88,7 @@ const AppProvider = ({ children }) => {
   const logout = async () => {
     setLoading(true);
     try {
+      console.log('logout endpoint')
       const response = await api.post("/api/auth/logout");
       if (response.data.success) {
         localStorage.removeItem("accessToken");
@@ -100,6 +101,7 @@ const AppProvider = ({ children }) => {
       if (isAxiosError(error)) {
         setError(error.response?.data || error.message);
       }
+      console.log(error)
     } finally {
       setLoading(false);
     }

@@ -6,7 +6,7 @@ import api from "../utils/axios";
 import { isAxiosError } from "axios";
 import ErrorMessage from "../components/ErrorMessage";
 
-const CreateProjectPage = ({ services }) => {
+const CreateProjectPage = ({ services, user}) => {
   const [error, setError] = useState(null);
   const [form, setForm] = useState({
     title: "",
@@ -116,7 +116,7 @@ const CreateProjectPage = ({ services }) => {
 
   return (
     <section className="create-project">
-      <Navbar />
+      <Navbar user={user} />
       {/* HEADER */}
       <Header header={header} />
 

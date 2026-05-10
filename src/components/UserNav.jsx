@@ -49,7 +49,13 @@ const NavbarUser = ({ user }) => {
 
         <div className="dropdown-divider"></div>
 
-        <button onClick={()=>logout()} className="logout-btn">
+        <button onClick={()=>{
+          try {
+            logout()
+          } catch (error) {
+            alert(error)
+          }
+        }} className="logout-btn">
           Logout
         </button>
 
