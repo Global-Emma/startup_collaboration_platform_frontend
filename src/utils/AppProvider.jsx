@@ -89,13 +89,12 @@ const AppProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await api.post("/api/auth/logout");
-      if (response.data.success) {
+      // if (response.data.success) {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("login");
         setUser(null);
         alert("User Logged Out Successfully");
         window.location.href('/sign-in')
-      }
     } catch (error) {
       if (isAxiosError(error)) {
         setError(error.response?.data || error.message);
