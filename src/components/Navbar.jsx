@@ -29,7 +29,7 @@ const Navbar = ({ user }) => {
     <header className={scroll ? "navbar scrolled" : "navbar"}>
       <nav className="nav-container">
         <div className="menu-icon">
-          {mobileMenu ? <LucideAlignCenterHorizontal onClick={() => setMobileMenu(false)} /> : <X onClick={() => setMobileMenu(true)} />}
+          {!mobileMenu ? <LucideAlignCenterHorizontal onClick={() => setMobileMenu(!mobileMenu)} /> : <X onClick={() => setMobileMenu(!mobileMenu)} />}
         </div>
         <div className="logo">
           <img src="/images/logo.png" alt="logo" />

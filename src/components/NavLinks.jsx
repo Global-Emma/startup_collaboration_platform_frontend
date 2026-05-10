@@ -15,7 +15,11 @@ const NavLinks = ({ user, mobile }) => {
       link: "/projects",
     },
     {
-      name: user?.role ? (user.role === "freelancer" ? "Employers" : "Freelancers") : "Users",
+      name: user?.role
+        ? user.role === "freelancer"
+          ? "Employers"
+          : "Freelancers"
+        : "Users",
       link: "/users",
     },
     {
@@ -31,24 +35,24 @@ const NavLinks = ({ user, mobile }) => {
   return (
     <div className="navlinks-container">
       <ul className="nav-links">
-      {navlinks.map((navlink, i) => {
-        return (
-          <li className={pathname === navlink.link ? "active" : ""} key={i}>
-            <Link to={navlink.link}>{navlink.name}</Link>
-          </li>
-        );
-      })}
-    </ul>
+        {navlinks.map((navlink, i) => {
+          return (
+            <li className={pathname === navlink.link ? "active" : ""} key={i}>
+              <Link to={navlink.link}>{navlink.name}</Link>
+            </li>
+          );
+        })}
+      </ul>
 
-      <ul className={"mobile-nav-links" + (mobile ? "" : " hidden")}>
-      {navlinks.map((navlink, i) => {
-        return (
-          <li className={pathname === navlink.link ? "active" : ""} key={i}>
-            <Link to={navlink.link}>{navlink.name}</Link>
-          </li>
-        );
-      })}
-    </ul>
+      <ul className={"mobile-nav-links" + (mobile ? "" : "hidden")}>
+        {navlinks.map((navlink, i) => {
+          return (
+            <li className={pathname === navlink.link ? "active" : ""} key={i}>
+              <Link to={navlink.link}>{navlink.name}</Link>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
