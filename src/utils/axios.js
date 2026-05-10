@@ -66,9 +66,6 @@ api.interceptors.response.use(
           localStorage.removeItem("login");
 
           localStorage.setItem('error', refreshError.response.data.message || refreshError.message)
-           alert('Session expired please Login again to continue')
-           window.location.href('/sign-in')
-
         }
 
         return Promise.reject(refreshError);

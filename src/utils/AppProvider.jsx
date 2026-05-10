@@ -4,7 +4,6 @@ import { AppContext } from "./AppContext";
 import { isAxiosError } from "axios";
 
 const AppProvider = ({ children }) => {
-  const [update, setUpdate] = useState(0)
   const [user, setUser] = useState(null);
   const [services, setServices] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -95,7 +94,6 @@ const AppProvider = ({ children }) => {
         localStorage.removeItem("login");
         setUser(null);
         alert("User Logged Out Successfully");
-        setUpdate(update + 1)
         window.location.href('/sign-in')
       }
     } catch (error) {

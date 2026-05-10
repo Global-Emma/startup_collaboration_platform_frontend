@@ -44,7 +44,7 @@ const NavLinks = ({ user, mobile }) => {
         })}
       </ul>
 
-      <ul className={"mobile-nav-links" + (mobile ? "" : "hidden")}>
+      <ul className={"mobile-nav-links" + (!mobile ? "" : " hidden")}>
         {navlinks.map((navlink, i) => {
           return (
             <li className={pathname === navlink.link ? "active" : ""} key={i}>
