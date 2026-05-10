@@ -1,4 +1,4 @@
-import axios, { isAxiosError } from 'axios';
+import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL || "https://startup-collaboration-platform-backend.onrender.com";
 
@@ -65,9 +65,9 @@ api.interceptors.response.use(
           localStorage.removeItem("accessToken");
           localStorage.removeItem("login");
 
-          if(isAxiosError(refreshError) && refreshError.response?.status === 401) {
-            localStorage.setItem('error', refreshError.response.data.message || refreshError.message);
-          }
+          localStorage.setItem('error', refreshError.response.data.message || refreshError.message)
+           alert('Session expired please Login again to continue')
+           window.location.href('/sign-in')
 
         }
 

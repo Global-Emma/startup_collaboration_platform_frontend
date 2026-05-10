@@ -96,6 +96,7 @@ const AppProvider = ({ children }) => {
         setUser(null);
         alert("User Logged Out Successfully");
         setUpdate(update + 1)
+        window.location.href('/sign-in')
       }
     } catch (error) {
       if (isAxiosError(error)) {
