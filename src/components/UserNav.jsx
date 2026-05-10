@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useApp } from "../utils/useApp";
 
-const NavbarUser = ({ user, onLogout }) => {
+const NavbarUser = ({ user }) => {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef();
+  const { logout } = useApp()
   
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -47,7 +49,7 @@ const NavbarUser = ({ user, onLogout }) => {
 
         <div className="dropdown-divider"></div>
 
-        <button onClick={onLogout} className="logout-btn">
+        <button onClick={()=>logout()} className="logout-btn">
           Logout
         </button>
 

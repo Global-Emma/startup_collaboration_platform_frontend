@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import NavLinks from "./NavLinks";
 import UserNav from "./UserNav";
 import { Link } from "react-router-dom";
-import { useApp } from "../utils/useApp";
 import { LucideAlignCenterHorizontal, X } from "lucide-react";
 
 const Navbar = ({ user }) => {
   const [scroll, setScroll] = useState(true);
   const [mobileMenu, setMobileMenu] = useState(false);
-  const { logout } = useApp()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,9 +38,6 @@ const Navbar = ({ user }) => {
         {user ? (
           <UserNav
             user={user}
-            onLogout={() => {
-              logout()
-            }}
           />
         ) : (
           <div className="nav-actions">
