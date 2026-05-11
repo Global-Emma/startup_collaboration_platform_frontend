@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import api from "../utils/axios";
 import socket from "../utils/socket";
 import DashboardNav from "../components/DashboardNav";
+import { ArrowBigLeft } from "lucide-react";
 
 const MessagesPage = ({ user }) => {
   const location = useLocation();
@@ -17,6 +18,25 @@ const MessagesPage = ({ user }) => {
 
   const [text, setText] = useState("");
 
+  const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    const mobileMode = () => {
+      const mediaQuery = window.matchMedia("(max-width: 860px)");
+
+      // Set the initial value
+      setMobile(mediaQuery.matches);
+
+      // Create a listener function
+      const handler = (e) => setMobile(e.matches);
+
+      // Listen for the change
+      mediaQuery.addEventListener("change", handler);
+
+      return () => mediaQuery.removeEventListener("change", handler);
+    };
+    mobileMode()
+  }, []);
   /*
   LOAD MESSAGES
   */
@@ -92,46 +112,65 @@ const MessagesPage = ({ user }) => {
     setText("");
   };
 
-  
   if (!user) {
     return <p>Please login to view messages.</p>;
   }
 
-
   return (
     <div className="messages-page-box">
-      <DashboardNav user={user} />
+      <section>
+        <DashboardNav user={user} />
+      </section>
+
       <div className="messages-page">
-        {/* LEFT */}
-        <div className="chat-sidebar">
+        {/* LEFT SIDEBAR */}
+        <div
+          className={`chat-sidebar ${mobile && selectedConversation ? "hidden" : ""}`}
+        >
           <h2>Messages</h2>
+          <div className="convo-list">
+            {conversations.map((convo) => {
+              const otherUser = convo.members.find((m) => m._id !== user._id);
+              const isActive = selectedConversation?._id === convo._id;
 
-          {conversations.map((convo) => {
-            const otherUser = convo.members.find((m) => m._id !== user._id);
-
-            return (
-              <div
-                key={convo._id}
-                onClick={() => handleSelectConversation(convo)}
-                className="conversation-card"
-              >
-                <img src={otherUser.avatar} alt="" />
-
-                <div>
-                  <h4>{otherUser.username}</h4>
-
+              return (
+                <div
+                  key={convo._id}
+                  onClick={() => handleSelectConversation(convo)}
+                  className={`conversation-card ${isActive ? "active" : ""}`}
+                >
+                  <div className="convo-header">
+                    <img src={otherUser.avatar} alt="avatar" />
+                    <h4>{otherUser.username}</h4>
+                  </div>
                   <p>{convo.lastMessage}</p>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
-        {/* RIGHT */}
-        <div className="chat-main">
+        {/* RIGHT MAIN CHAT */}
+        <div
+          className={`chat-main ${mobile && !selectedConversation ? "hidden" : ""}`}
+        >
           {selectedConversation ? (
             <>
-              <div className="chat-header">Chat</div>
+              <div className="chat-header">
+                {/* Back button only shows on mobile via CSS */}
+                <button
+                  className="back-btn"
+                  onClick={() => handleSelectConversation(null)}
+                >
+                  <ArrowBigLeft />
+                </button>
+                <span>
+                  {
+                    selectedConversation.members.find((m) => m._id !== user._id)
+                      ?.username
+                  }
+                </span>
+              </div>
 
               <div className="chat-body">
                 {messages.map((msg) => (
@@ -153,13 +192,15 @@ const MessagesPage = ({ user }) => {
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   placeholder="Type message..."
+                  onKeyPress={(e) => e.key === "Enter" && handleSend()}
                 />
-
                 <button onClick={handleSend}>Send</button>
               </div>
             </>
           ) : (
-            <div className="no-chat">Select conversation</div>
+            <div className="no-chat">
+              <h3>Select a conversation to start messaging</h3>
+            </div>
           )}
         </div>
       </div>
