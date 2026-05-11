@@ -105,7 +105,6 @@ const SignIn = () => {
             type="button"
             className="google-btn"
             onClick={handleGoogleSignIn}
-            style={{color: "#0000"}}
           >
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"

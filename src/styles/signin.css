@@ -112,7 +112,8 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 10px;
+  color: var(--text-h);
+  padding: 10px;    
   border-radius: 25px;
   border: 1px solid var(--border);
   background: white;

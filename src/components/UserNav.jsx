@@ -18,7 +18,7 @@ const NavbarUser = ({ user }) => {
   }, []);
  
   return (
-    <div className="nav-user-wrapper" ref={dropdownRef} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+    <div className="nav-user-wrapper" ref={dropdownRef} onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} onClick={() => setOpen(!open)}>
       
       {/* USER */}
       <div className="nav-user">
