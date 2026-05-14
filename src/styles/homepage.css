@@ -319,7 +319,7 @@
   }
 
   .hidden {
-    display: flex;
+    display: flex !important;
   }
 
   .menu-icon {
