@@ -314,10 +314,6 @@
     display: none;
   }
 
-  .mobile-nav-links {
-    display: none;
-  }
-
   .hidden {
     display: flex !important;
   }
